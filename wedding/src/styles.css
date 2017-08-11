@@ -35,5 +35,9 @@ body {
 }
 .promo-img {
   border-radius: 10px;
-  border: 10px solid #fff;
+  border: 8px solid #fff;
+}
+
+.foot {
+  font-size: .9em;
 }

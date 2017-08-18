@@ -6,11 +6,14 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
-import { HeaderComponent } from './header.component';
-import { BodyComponent } from './body.component';
-import { FooterComponent } from './footer.component';
-import { RsvpComponent } from './rsvp.component';
-import { ContactComponent } from './contact.component';
+import { HeaderComponent } from './chrome/header.component';
+import { FooterComponent } from './chrome/footer.component';
+
+import { BodyComponent } from './pages/body.component';
+import { RsvpComponent } from './pages/rsvp.component';
+import { ContactComponent } from './pages/contact.component';
+import { PhotosComponent } from './pages/photos.component';
+
 
 import { RsvpService } from './rsvp.service';
 
@@ -21,7 +24,8 @@ import { RsvpService } from './rsvp.service';
     BodyComponent,
     FooterComponent,
     RsvpComponent,
-    ContactComponent
+    ContactComponent,
+    PhotosComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RsvpService } from './rsvp.service';
+import { RsvpService } from './../rsvp.service';
 
 @Component({
   selector: 'rsvp-component',

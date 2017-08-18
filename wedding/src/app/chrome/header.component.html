@@ -7,11 +7,41 @@
         Anthony & Dana
         </a>
         </div>
-        <span class="nav-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </span>
+        <div>
+            <div (click)="mobileMenuClick()" class="dropdown is-hidden-tablet {{menuIsActive}}">
+                    <div class="dropdown-trigger">
+                        <button class="button is-info" aria-haspopup="true" aria-controls="dropdown-menu2">
+                        <span class="icon is-small">
+                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                        </span>
+                        </button>
+                    </div>
+                    <div class="dropdown-menu" id="dropdown-menu2" role="menu">
+                        <div class="dropdown-content">
+                            <div class="dropdown-item">
+                                    <a routerLink="/"  class="nav-item">
+                                        Home
+                                        </a>
+                            </div>
+                            <div class="dropdown-item">
+                                    <a routerLink="/photos"  class="nav-item">
+                                        Photos
+                                        </a>
+                            </div>
+                            <div class="dropdown-item">
+                                    <a routerLink="/contact"  class="nav-item">
+                                        Contact
+                                        </a>
+                            </div>
+                            <div class="dropdown-item">
+                                    <a routerLink="/rsvp" (click)="rsvp()" class="nav-item">
+                                        RSVP
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
         <div class="nav-right nav-menu">
             <a routerLink="/fyi"  class="nav-item">
             FYI

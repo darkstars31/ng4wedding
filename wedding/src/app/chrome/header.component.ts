@@ -6,7 +6,16 @@ import { Component } from '@angular/core';
 })
 
 export class HeaderComponent {
-  title = 'app';
+  
+  public menuIsActive: string = "";
+
+  public mobileMenuClick () : void {
+    if(this.menuIsActive == "is-active"){
+      this.menuIsActive = "";
+    } else {
+      this.menuIsActive = "is-active";
+    }
+  }
 
   public rsvp () : void {
     console.log('any');

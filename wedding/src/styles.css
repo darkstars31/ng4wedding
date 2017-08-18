@@ -37,6 +37,9 @@ body {
   border-radius: 10px;
   border: 8px solid #fff;
 }
+.hero .dropdown a.nav-item {
+  color: black;
+}
 
 .foot {
   font-size: .9em;

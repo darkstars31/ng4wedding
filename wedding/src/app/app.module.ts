@@ -14,6 +14,8 @@ import { RsvpComponent } from './pages/rsvp.component';
 import { ContactComponent } from './pages/contact.component';
 import { PhotosComponent } from './pages/photos.component';
 
+import { NotFoundComponent } from './pages/NotFound.component';
+
 
 import { RsvpService } from './rsvp.service';
 
@@ -25,7 +27,8 @@ import { RsvpService } from './rsvp.service';
     FooterComponent,
     RsvpComponent,
     ContactComponent,
-    PhotosComponent
+    PhotosComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

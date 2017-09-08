@@ -44,3 +44,9 @@ body {
 .foot {
   font-size: .9em;
 }
+
+select {
+  border: 1px solid #fff;
+  background-color: rgba(255,255,255,.5);
+  padding: 5px;
+}

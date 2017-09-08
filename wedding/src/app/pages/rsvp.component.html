@@ -1,25 +1,133 @@
 <div class="hero-body">
     <div class="container has-text-centered">
-    <div class="columns is-vcentered">
-        <div class="column is-12">
-        <h1 class="title is-4">
-            Oh so you got a nifty RSVP code did ya?
-        </h1>
-        <h2 class="subtitle is-8">
-            Sweet, put it in the box below to continue.
-        </h2>
-        <br>
-         <div class="field has-addons">
-            <div class="control is-expanded has-text-centered">
-                <input class="input is-large" type="text" placeholder="Psst, type RSVP Code in here">
+        <div *ngIf="!rsvpType" class="columns is-vcentered">
+            <div class="column is-12">
+            <h1 class="title is-4">
+                Oh so you got a nifty RSVP code did ya?
+            </h1>
+            <h2 class="subtitle is-8">
+                Sweet, put it in the box below to continue.
+            </h2>
+            <br>
+            <div class="field has-addons">
+                <div class="control is-expanded has-text-centered">
+                    <input #rsvpCode class="input is-large" type="text" placeholder="Psst, type RSVP code in this box!" />
+                </div>
+                <div class="control">
+                    <a (click)="submitRsvpCode(rsvpCode.value); rsvpCode.value = ''" class="button is-large is-danger is-outlined">
+                        RSVP
+                    </a>
+                </div>
+            </div> 
             </div>
-            <div class="control">
-                <a class="button is-large is-danger is-outlined">
-                    RSVP
-                </a>
-            </div>
-        </div> 
         </div>
-    </div>
+
+        <div *ngIf="stage == 1" class="columns is-vcentered">
+            <div class="column is-12">
+            <h1 class="title is-4">
+                Will you be attending?
+            </h1>
+            <br />
+            <h2 class="subtitle is-8">
+                <a (click)="areYouAttending(true)" class="button is-large is-success">
+                    <span class="icon is-medium">
+                      <i class="fa fa-check-square-o"></i>
+                    </span>
+                    <span>Yes</span>
+                  </a>
+                  <a (click)="areYouAttending(false)" class="button is-large is-danger">
+                      <span class="icon is-medium">
+                        <i class="fa fa-times-circle-o"></i>
+                      </span>
+                      <span>No</span>
+                    </a>
+            </h2>       
+            </div> 
+        </div>       
+
+        <div *ngIf="stage == 2" class="columns is-vcentered">
+            <div class="column is-12">
+            <h1 class="title is-4">
+                Nice Work Kid!
+            </h1>
+            <h2 class="subtitle is-8">
+                Your code actually worked.
+            </h2>                  
+              
+              <div *ngIf="attending == true" class="field is-horizontal">
+                <div class="field-label">
+                  <label class="label" style="color:white">Yes! I will be attending because</label>
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <div class="control">
+                      <label class="radio">
+                        <input type="radio" name="member">
+                        Two words: Free Booze!
+                      </label>
+                      <br />
+                      <label class="radio">
+                        <input type="radio" name="member">
+                        I'm in your wedding party, idiot. Wait, is this optional?
+                      </label>
+                      <br />
+                      <label class="radio">
+                        <input type="radio" name="member">
+                        I would never deam of missing it! After all, knowing the 
+                        <select [(ngModel)]="favoriteFamily">
+                            <option *ngFor="let name of familyNames" [ngValue]="name">{{name}}</option>
+                        </select>
+                        family, this should be a day full of must-see 
+                        <select [(ngModel)]="yesAjective">
+                            <option *ngFor="let adj of yesAdjectives" [ngValue]="adj">{{adj}}</option>
+                        </select>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="attending == false" class="field is-horizontal">
+                <div class="field-label">
+                  <label class="label" style="color:white">No. I won't be attending because</label>
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <div class="control">
+                      <label class="radio">
+                        <input type="radio" name="member">
+                        No - Because I only really like one of you (you know who you are).
+                      </label>
+                      <br />
+                      <label class="radio">
+                        <input type="radio" name="member">
+                        No - Weddings make me sad, because nobody loves me.
+                      </label>
+                      <br />
+                      <label class="radio">
+                        <input type="radio" name="member">
+                        No - Other uncreative reason.
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="field is-horizontal">
+                <div class="field-label">
+                  <!-- Left empty for spacing -->
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <div class="control">
+                      <button class="button is-primary">
+                        Submit My RSVP
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -8,8 +8,8 @@ import { RsvpService } from './../rsvp.service';
 
 export class RsvpComponent {
 
-  private rsvpType: string = "";
-  private stage: number = 0;
+  public rsvpType: string = "";
+  public stage: number = 0;
   private attending: boolean = null;
   public rsvpAnswer: rsvpAnswers;
 

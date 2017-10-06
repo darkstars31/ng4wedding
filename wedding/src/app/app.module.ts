@@ -10,6 +10,7 @@ import { HeaderComponent } from './chrome/header.component';
 import { FooterComponent } from './chrome/footer.component';
 
 import { BodyComponent } from './pages/body.component';
+import { FyiComponent } from './pages/fyi.component';
 import { RsvpComponent } from './pages/rsvp.component';
 import { ContactComponent } from './pages/contact.component';
 import { PhotosComponent } from './pages/photos.component';
@@ -25,6 +26,7 @@ import { RsvpService } from './rsvp.service';
     HeaderComponent,
     BodyComponent,
     FooterComponent,
+    FyiComponent,
     RsvpComponent,
     ContactComponent,
     PhotosComponent,

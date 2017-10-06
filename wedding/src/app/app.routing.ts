@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { FyiComponent } from './pages/fyi.component';
 import { BodyComponent } from './pages/body.component';
 import { RsvpComponent } from './pages/rsvp.component';
 import { ContactComponent } from './pages/contact.component';
@@ -9,6 +10,7 @@ import { PhotosComponent } from './pages/photos.component';
 
 const appRoutes: Routes = [
   { path: '', component: BodyComponent },
+  { path: 'fyi', component: FyiComponent },
   { path: 'rsvp', component: RsvpComponent },
   { path: 'photos', component: PhotosComponent},
   { path: 'contact', component: ContactComponent }

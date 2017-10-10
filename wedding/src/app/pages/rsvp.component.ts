@@ -29,12 +29,13 @@ export class RsvpComponent {
   }
 
   public submitRsvpCode (rsvpCode: string): void {
-    this.RsvpService.verifyRsvpCode(rsvpCode).then(data =>
-       this.rsvpType = data,
-      );
-      if(this.rsvpType == "true") {
-        this.stage = 1;
-      }
+    var x = this.RsvpService.verifyRsvpCode(rsvpCode).then(data => {console.log(data)
+    
+      // if(this.rsvpType == "true") {
+      //   this.stage = 1;
+      // }
+    });
+   
   }
 }
 

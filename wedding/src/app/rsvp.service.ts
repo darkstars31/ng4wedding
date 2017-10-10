@@ -6,8 +6,10 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class RsvpService {
-    private url = 'http://localhost:3031/rsvp/';
-    private headers = new Headers({'Content-Type': 'application/json'});
+    private url = 'http://localhost:3031/rsvp';
+    private headers = new Headers(
+        {'Content-Type': 'application/json'}
+    );
     
     constructor(private http: Http) {}
 
@@ -16,12 +18,12 @@ export class RsvpService {
         return Promise.reject(error.message || error);   
     }
 
-    public verifyRsvpCode(rsvpCode: string,): Promise<any>    {
+    public verifyRsvpCode(rsvpCode: string): Promise<string>    {
         
         const url = `${this.url}/${rsvpCode}`;
         return this.http.get(url, {headers: this.headers})
         .toPromise()
-        .then(response => response.json().data) 
+        .then(res => {res.json().data as string}) 
         .catch(this.handleError);
         
     }

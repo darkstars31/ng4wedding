@@ -2,19 +2,26 @@
     <div class="container has-text-centered">
         <div *ngIf="!rsvpType" class="columns is-vcentered">
             <div class="column is-12">
-            <h1 class="title is-4">
+            <!-- <h1 class="title is-4">
                 Oh so you got a nifty RSVP code did ya?
             </h1>
             <h2 class="subtitle is-8">
                 Sweet, put it in the box below to continue.
+            </h2> -->
+            <h1 class="title is-4">
+              We see you are super excited to fill out your RSVP!
+            </h1>
+            <h2 class="subtitle is-8">
+                Unfortunately this feature is not enabled yet.
             </h2>
             <br>
             <div class="field has-addons">
                 <div class="control is-expanded has-text-centered">
-                    <input #rsvpCode class="input is-large" type="text" placeholder="Psst, type RSVP code in this box!" />
+                    <!-- <input #rsvpCode class="input is-large" type="text" placeholder="Psst, type RSVP code in this box!" /> -->
+                    <input #rsvpCode class="input is-large" type="text" placeholder="You will receive your code in the mail. Thanks for your patience." />
                 </div>
                 <div class="control">
-                    <a (click)="submitRsvpCode(rsvpCode.value); rsvpCode.value = ''" class="button is-large is-danger is-outlined">
+                    <a (click)="submitRsvpCode(rsvpCode.value); rsvpCode.value = ''" class="button is-large is-danger is-outlined" disabled>
                         RSVP
                     </a>
                 </div>

@@ -32,9 +32,9 @@ app.patch('/rsvp/:code', function (req, res, next) {
       family.child(req.params.code).update(
         req.body
       );
-        res.send("Success");
+        res.send(true);
       } else {
-        res.send('Failure');
+        res.send(false);
       }
   });    
 });

@@ -18,17 +18,17 @@ export class RsvpService {
         return Promise.reject(error.message || error);   
     }
 
-    public verifyRsvpCode(rsvpCode: string): Promise<string>    {
+    public verifyRsvpCode(rsvpCode: string): Promise<string> {
         
         const url = `${this.url}/${rsvpCode}`;
         return this.http.get(url, {headers: this.headers})
         .toPromise()
-        .then(res => {res.json().data as string}) 
+        .then(res => res.json()) 
         .catch(this.handleError);
         
     }
 
-    public updateRsvpData(rsvpCode: string, data: string): Promise<any>    {
+    public updateRsvpData(rsvpCode: string, data: string): Promise<any> {
         
         const url = `${this.url}/${rsvpCode}`;
         return this.http.patch(url, JSON.stringify(data), {headers: this.headers})

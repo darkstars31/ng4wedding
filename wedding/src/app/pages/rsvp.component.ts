@@ -13,6 +13,9 @@ export class RsvpComponent {
   private attending: boolean = null;
   public rsvpAnswer: rsvpAnswers;
 
+  public isLoading: boolean = false;
+  public inputError: boolean = false;
+
   public favoriteFamily: string;
   public yesAdjective: string;
 
@@ -29,14 +32,22 @@ export class RsvpComponent {
   }
 
   public submitRsvpCode (rsvpCode: string): void {
-    var x = this.RsvpService.verifyRsvpCode(rsvpCode).then(data => {console.log(data)
-    
-      // if(this.rsvpType == "true") {
-      //   this.stage = 1;
-      // }
+    this.inputError = false;
+    this.isLoading = true;
+    this.RsvpService.verifyRsvpCode(rsvpCode).then(data => {
+      if(data) {
+        this.stage = 1;
+      } else {
+        this.inputError = true;
+        this.isLoading = false;
+      }
     });
-   
   }
+
+  public removeNotification(): void {
+    this.inputError = false;    
+  }
+
 }
 
 class rsvpAnswers {

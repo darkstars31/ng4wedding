@@ -1,6 +1,6 @@
 <div class="hero-body">
     <div class="container has-text-centered">
-        <div *ngIf="!rsvpType" class="columns is-vcentered">
+        <div *ngIf="stage == 0 && isLoading == false" class="columns is-vcentered">
             <div class="column is-12">
             <!-- <h1 class="title is-4">
                 Oh so you got a nifty RSVP code did ya?
@@ -18,15 +18,19 @@
             <div class="field has-addons">
                 <div class="control is-expanded has-text-centered">
                     <!-- <input #rsvpCode class="input is-large" type="text" placeholder="Psst, type RSVP code in this box!" /> -->
-                    <input #rsvpCode class="input is-large" type="text" placeholder="You will receive your code in the mail. Thanks for your patience." />
+                    <input #rsvpCode class="input is-large" [ngClass]="{'is-danger': inputError}" type="text" placeholder="You will receive your code in the mail. Thanks for your patience." />
                 </div>
                 <div class="control">
-                    <a (click)="submitRsvpCode(rsvpCode.value); rsvpCode.value = ''" class="button is-large is-danger is-outlined" disabled>
+                    <a (click)="submitRsvpCode(rsvpCode.value); rsvpCode.value = ''" class="button is-large is-danger is-outlined">
                         RSVP
                     </a>
-                </div>
+                  </div>
             </div> 
+            <div class="notification is-danger" style="position: absolute" *ngIf="inputError == true">
+                <button class="delete" (click)="removeNotification($event)"></button>
+                We couldn't find your code in our Super Top Secret RSVP&trade; catalog. <strong>Please try again</strong>, if the issue perists please email tony@tonysanti.com
             </div>
+            </div>           
         </div>
 
         <div *ngIf="stage == 1" class="columns is-vcentered">

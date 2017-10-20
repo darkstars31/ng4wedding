@@ -9,6 +9,8 @@ var firebase = require("firebase");
 app.use(bodyparser.urlencoded({extended: false}));
 app.use(bodyparser.json());
 firebase.initializeApp(config.firebase);
+firebase.auth().signInWithEmailAndPassword(config.firebaseAuth.email,config.firebaseAuth.password).catch(err => { console.log(err)});
+
 
 var dbContext = firebase.database();
 

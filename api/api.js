@@ -23,8 +23,8 @@ app.use(function(req, res, next) {
 
 console.log('Listening on localhost:'+ config.express.port);
 
-app.get('/ping', function(req,res,next){
-    res.status(204);
+app.get('/health', function(req,res,next){
+    res.status(200);
     res.send();
 });
 

@@ -23,9 +23,11 @@ app.use(function(req, res, next) {
 
 console.log('Listening on localhost:'+ config.express.port);
 
-app.get('/ping', function(req,res,next){
-    res.status(204);
-    res.send();
+app.get('/health', function(req,res,next){
+  dbContext.ref('/rsvp/health').once('value').then(function(snapshot) {
+    res.status(200);
+    res.send(snapshot);
+  });    
 });
 
 app.get('/rsvp/:code', function(req, res, next){

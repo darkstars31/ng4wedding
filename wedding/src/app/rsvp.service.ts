@@ -28,6 +28,14 @@ export class RsvpService {
         
     }
 
+    public verifyApiStatus(): Promise<string> {
+        const url = `${this.url}/health`;
+        return this.http.get(url, {headers: this.headers})
+        .toPromise()
+        .then(res => res.json()) 
+        .catch(this.handleError);
+    }
+
     public updateRsvpData(rsvpCode: string, data: string): Promise<any> {
         
         const url = `${this.url}/${rsvpCode}`;

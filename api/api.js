@@ -24,8 +24,15 @@ app.use(function(req, res, next) {
 console.log('Listening on localhost:'+ config.express.port);
 
 app.get('/health', function(req,res,next){
+<<<<<<< HEAD
     res.status(200);
     res.send();
+=======
+  dbContext.ref('/rsvp/health').once('value').then(function(snapshot) {
+    res.status(200);
+    res.send(snapshot);
+  });    
+>>>>>>> origin/master
 });
 
 app.get('/rsvp/:code', function(req, res, next){

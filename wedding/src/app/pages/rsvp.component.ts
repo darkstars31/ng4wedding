@@ -13,6 +13,7 @@ export class RsvpComponent {
   private attending: boolean = null;
   public rsvpAnswer: rsvpAnswers;
 
+  public isApiOk: boolean = null;
   public isLoading: boolean = false;
   public inputError: boolean = false;
 
@@ -24,7 +25,13 @@ export class RsvpComponent {
 
 
 
-  constructor(private RsvpService: RsvpService){  }
+  constructor(private RsvpService: RsvpService){ 
+    this.RsvpService.verifyApiStatus().then(data => {
+      this.isApiOk = true;
+    }).catch(e => {
+      this.isApiOk = false;
+    });
+   }
   
   public areYouAttending(isAttending: boolean) {
     this.attending = isAttending;
@@ -44,8 +51,8 @@ export class RsvpComponent {
     });
   }
 
-  public removeNotification(): void {
-    this.inputError = false;    
+  public removeNotification(event): void {
+    this[event] = !this[event];    
   }
 
 }

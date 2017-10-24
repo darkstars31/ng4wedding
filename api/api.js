@@ -7,6 +7,7 @@ var jwt     = require('jsonwebtoken');
 var bodyparser = require('body-parser');
 var firebase = require("firebase");
 
+
 app.use(bodyparser.urlencoded({extended: false}));
 app.use(bodyparser.json());
 firebase.initializeApp(config.firebase);
@@ -15,7 +16,7 @@ var dbContext = firebase.database();
 var logger = log4js.getLogger('api');
 log4js.configure(config.log4jsConfig);
 
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
@@ -23,20 +24,15 @@ app.use(function(req, res, next) {
 
 console.log('Listening on localhost:'+ config.express.port);
 
-app.get('/health', function(req,res,next){
-<<<<<<< HEAD
-    res.status(200);
-    res.send();
-=======
-  dbContext.ref('/rsvp/health').once('value').then(function(snapshot) {
+app.get('/health', (req,res,next) => {
+  dbContext.ref('/rsvp/health').once('value').then((snapshot) => {
     res.status(200);
     res.send(snapshot);
   });    
->>>>>>> origin/master
 });
 
-app.get('/rsvp/:code', function(req, res, next){
-    dbContext.ref('/rsvp/families/'+req.params.code).once('value').then(function(snapshot) {
+app.get('/rsvp/:code', (req, res, next) => {
+    dbContext.ref('/rsvp/families/'+req.params.code).once('value').then((snapshot) => {
       if(snapshot.exists()){
         res.send(generateJwt(snapshot));
       } else {
@@ -46,9 +42,8 @@ app.get('/rsvp/:code', function(req, res, next){
     });    
 });
 
-app.patch('/rsvp/:code', validateJwt, function (req, res, next) {
-  //validateJwt(req,res);
-  dbContext.ref('/rsvp/families/'+req.params.code).once('value').then(function(snapshot) {
+app.patch('/rsvp/:code', validateJwt, (req, res, next) => {
+  dbContext.ref('/rsvp/families/'+req.params.code).once('value').then((snapshot) => {
     if(snapshot.exists()) {
       try{
       var family = dbContext.ref('/rsvp/families/');

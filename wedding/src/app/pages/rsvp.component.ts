@@ -30,6 +30,7 @@ export class RsvpComponent {
       this.isApiOk = true;
     }).catch(e => {
       this.isApiOk = false;
+      console.log('ApiStatus Bad: '+ e);
     });
    }
   
@@ -43,6 +44,7 @@ export class RsvpComponent {
     this.isLoading = true;
     this.RsvpService.verifyRsvpCode(rsvpCode).then(data => {
       if(data) {
+        localStorage.setItem('accessToken', data);
         this.stage = 1;
       } else {
         this.inputError = true;

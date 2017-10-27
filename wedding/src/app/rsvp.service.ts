@@ -10,22 +10,25 @@ export class RsvpService {
     private headers = new Headers(
         {'Content-Type': 'application/json'}
     );
-    
-    constructor(private http: Http) {}
+  
+    constructor(private http: Http) {
+        var jwt = localStorage.getItem('accessToken');
+        if(jwt != null){
+            this.headers.append('Authorization', jwt);
+        }
+    }
 
     private handleError(error: any): Promise<any> {  
         console.error('An Error occurred', error);
         return Promise.reject(error.message || error);   
     }
 
-    public verifyRsvpCode(rsvpCode: string): Promise<string> {
-        
+    public verifyRsvpCode(rsvpCode: string): Promise<string> {      
         const url = `${this.url}/${rsvpCode}`;
         return this.http.get(url, {headers: this.headers})
         .toPromise()
         .then(res => res.json()) 
-        .catch(this.handleError);
-        
+        .catch(this.handleError);      
     }
 
     public verifyApiStatus(): Promise<string> {
@@ -42,9 +45,6 @@ export class RsvpService {
         return this.http.patch(url, JSON.stringify(data), {headers: this.headers})
         .toPromise()
         .then(response => response.json().data) 
-        .catch(this.handleError);
-        
+        .catch(this.handleError);     
     }
-
-
 }

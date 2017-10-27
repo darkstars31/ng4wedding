@@ -7,7 +7,6 @@ var app     = express();
 var jwtHelper = require('./jwtHelper');
 var bodyparser = require('body-parser');
 
-
 app.use(bodyparser.urlencoded({extended: false}));
 app.use(bodyparser.json());
 var logger = log4js.getLogger('api');
@@ -25,13 +24,13 @@ app.get('/health', (req,res,next) => {
   dao.get('/rsvp/health').then((snapshot) => {
     res.status(200);
     res.send(snapshot);
-  });    
+  }).catch(e => console.log(e));    
 });
 
 app.get('/rsvp/:code', (req, res, next) => {
     dao.get('/rsvp/families/'+req.params.code).then((snapshot) => {
       if(snapshot.exists()){
-        res.send(jwtHelper.generate(snapshot));
+        res.send(JSON.stringify(jwtHelper.generate(snapshot)));
       } else {
         logger.error("Rsvp Code does not exist. Code: " + req.params.code);
         res.send(snapshot.exists()); 

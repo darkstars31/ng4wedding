@@ -16,6 +16,7 @@ app.use((req, res, next) => {
   var origin = req.get('origin');
   if(config.express.allowedOrigins.some((item) => origin.includes(item))){
     res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     next();
   } else {
     res.status(401);

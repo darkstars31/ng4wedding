@@ -16,8 +16,4 @@ export class HeaderComponent {
       this.menuIsActive = "is-active";
     }
   }
-
-  public rsvp () : void {
-    console.log('any');
-  } 
 }

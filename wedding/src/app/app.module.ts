@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
+import { InterceptorModule } from './interceptor.module';
 import { HeaderComponent } from './chrome/header.component';
 import { FooterComponent } from './chrome/footer.component';
 
@@ -35,8 +36,9 @@ import { RsvpService } from './rsvp.service';
   imports: [
     BrowserModule,
     RouterModule,
-    AppRoutingModule,
+    AppRoutingModule, 
     HttpModule,
+    InterceptorModule,
     FormsModule
   ],
   providers: [

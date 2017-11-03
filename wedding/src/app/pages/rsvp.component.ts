@@ -8,7 +8,7 @@ import { RsvpService } from './../rsvp.service';
 
 export class RsvpComponent {
 
-  public rsvpType: string = "";
+  public rsvpCode: string = "";
   public stage: number = 0;
   private attending: boolean = null;
   public rsvpAnswer: rsvpAnswers;
@@ -27,10 +27,10 @@ export class RsvpComponent {
 
   constructor(private RsvpService: RsvpService){ 
     this.RsvpService.verifyApiStatus().then(data => {
-      this.isApiOk = true;
+      this.isApiOk = true;   
     }).catch(e => {
       this.isApiOk = false;
-      console.log('ApiStatus Bad: '+ e);
+      console.log('ApiStatus Bad: '+ e);     
     });
    }
   
@@ -39,11 +39,19 @@ export class RsvpComponent {
     this.stage = 2;
   }
 
+  public finishAndUpdate() {
+    this.RsvpService.updateRsvpData(this.rsvpCode, {
+      "isAttending": this.attending
+    }.toString());
+    this.stage = 3;
+  }
+
   public submitRsvpCode (rsvpCode: string): void {
     this.inputError = false;
     this.isLoading = true;
     this.RsvpService.verifyRsvpCode(rsvpCode).then(data => {
       if(data) {
+        this.rsvpCode = rsvpCode;
         localStorage.setItem('accessToken', data);
         this.stage = 1;
       } else {

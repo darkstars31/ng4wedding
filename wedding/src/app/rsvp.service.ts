@@ -6,9 +6,11 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class RsvpService {
-    private url = 'http://localhost:3031/rsvp';
+    private url = location.href.includes('tonysanti.com') || true ? 'http://40.77.25.47:3031/rsvp' : 'http://localhost:3031/rsvp';
     private headers = new Headers(
-        {'Content-Type': 'application/json'}
+        {'Content-Type': 'application/json',
+        'Authorization': ''
+        }      
     );
   
     constructor(private http: Http) {

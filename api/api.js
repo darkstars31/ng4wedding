@@ -13,12 +13,18 @@ var logger = log4js.getLogger('api');
 log4js.configure(config.log4jsConfig);
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
+  var origin = req.get('origin');
+  if(config.express.allowedOrigins.some((item) => origin.includes(item))){
+    res.header("Access-Control-Allow-Origin", "*");
+    next();
+  } else {
+    res.status(401);
+    res.send('Not in the allowed origins list.');
+  }
 });
 
 console.log('Listening on localhost:'+ config.express.port);
+console.log('Allowing Origins:'+ config.express.allowedOrigins);
 
 app.get('/health', (req,res,next) => {
   dao.get('/rsvp/health').then((snapshot) => {

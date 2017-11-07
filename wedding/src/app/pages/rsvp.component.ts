@@ -47,10 +47,10 @@ export class RsvpComponent {
   public submitRsvpCode (rsvpCode: string): void {
     this.inputError = false;
     this.isLoading = true;
-    this.RsvpService.verifyRsvpCode(rsvpCode).then(data => {
-      if(data) {
+    this.RsvpService.verifyRsvpCode(rsvpCode).then(accessToken => {   
+      if(accessToken) {
         this.rsvpCode = rsvpCode;
-        localStorage.setItem('accessToken', data);
+        localStorage.setItem('accessToken', accessToken);
         this.stage = 1;
       } else {
         this.inputError = true;

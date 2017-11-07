@@ -2,11 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
-//import { InterceptorModule } from './interceptor.module';
+import { InterceptorModule } from './interceptor.module';
 import { HeaderComponent } from './chrome/header.component';
 import { FooterComponent } from './chrome/footer.component';
 
@@ -37,8 +37,8 @@ import { RsvpService } from './rsvp.service';
     BrowserModule,
     RouterModule,
     AppRoutingModule, 
-    HttpModule,
-    //InterceptorModule,
+    HttpClientModule,
+    InterceptorModule,
     FormsModule
   ],
   providers: [

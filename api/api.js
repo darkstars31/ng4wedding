@@ -38,9 +38,13 @@ app.get('/health', (req,res,next) => {
 app.get('/rsvp/:code', (req, res, next) => {
     dao.get('/rsvp/families/'+req.params.code).then((snapshot) => {
       if(snapshot.exists()){
-        res.send(JSON.stringify(jwtHelper.generate(snapshot)));
+        res.send({ 
+          "accessToken": JSON.stringify(jwtHelper.generate(req.params.code))
+        });
       } else {
-        logger.error("Rsvp Code does not exist. Code: " + req.params.code);
+        if(req.params.code != 'health'){
+          logger.error("Rsvp Code does not exist. Code: " + req.params.code);
+        }
         res.send(snapshot.exists()); 
       } 
     }).catch(e => {

@@ -19,7 +19,7 @@ var jwtHelper = {
       generate: function(payload) {
         var key = fs.readFileSync(__dirname + '/keys/private_key.pem');
         let expiration = Math.floor(Date.now() / 1000) + (60 * 60);
-        return jwt.sign({payload: payload, exp: expiration},key, {algorithm: 'RS256'});  
+        return jwt.sign({payload: payload},key, {algorithm: 'RS256', expiresIn: '1h'});  
       }
 }
 

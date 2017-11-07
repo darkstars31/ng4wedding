@@ -40,9 +40,7 @@ export class RsvpComponent {
   }
 
   public finishAndUpdate() {
-    this.RsvpService.updateRsvpData(this.rsvpCode, {
-      "isAttending": this.attending
-    }.toString());
+    this.RsvpService.updateRsvpData(this.rsvpCode, {"attending": this.attending});
     this.stage = 3;
   }
 

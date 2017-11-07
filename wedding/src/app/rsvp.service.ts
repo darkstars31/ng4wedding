@@ -8,9 +8,7 @@ import 'rxjs/add/operator/toPromise';
 export class RsvpService {
     private url = location.href.includes('tonysanti.com') || true ? 'http://40.77.25.47:3031/rsvp' : 'http://localhost:3031/rsvp';
     private headers = new Headers(
-        {'Content-Type': 'application/json',
-        'Authorization': ''
-        }      
+        {'Content-Type': 'application/json'}      
     );
   
     constructor(private http: Http) {
@@ -41,7 +39,7 @@ export class RsvpService {
         .catch(this.handleError);
     }
 
-    public updateRsvpData(rsvpCode: string, data: string): Promise<any> {
+    public updateRsvpData(rsvpCode: string, data: object): Promise<any> {
         
         const url = `${this.url}/${rsvpCode}`;
         return this.http.patch(url, JSON.stringify(data), {headers: this.headers})

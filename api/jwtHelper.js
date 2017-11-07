@@ -10,7 +10,7 @@ var jwtHelper = {
           jwt.verify(req.headers.authorization,key);
         } catch (e) {
           res.status(401);
-          res.send('Unauthorized');
+          res.send('Unauthorized. Message: '+ e);
           return;
         }
         next();

@@ -17,7 +17,7 @@ export class RsvpService {
 
     public verifyRsvpCode(rsvpCode: string): Promise<string> {      
         const url = `${this.url}/${rsvpCode}`;
-        return this.http.get(url)
+        return this.http.get(url, { responseType: 'text'})
         .toPromise()
         .then(res => res['accessToken']) 
         .catch(this.handleError);      
@@ -25,7 +25,7 @@ export class RsvpService {
 
     public verifyApiStatus(): Promise<string> {
         const url = `${this.url}/health`;
-        return this.http.get(url)
+        return this.http.get(url,)
         .toPromise()
         .then(res => res) 
         .catch(this.handleError);

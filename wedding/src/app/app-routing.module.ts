@@ -1,8 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from "@angular/common/http";
-
-import { AppRoutingModule } from './app-routing.module';
+import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './chrome/header/header.component';
@@ -14,28 +11,20 @@ import { PhotosComponent } from './pages/photos/photos.component';
 import { RsvpComponent } from './pages/rsvp/rsvp.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
 
-import { RsvpService } from './services/rsvp.service';
-
+const routes: Routes = [
+  { path: '', component: BodyComponent },
+  { path: 'fyi', component: FyiComponent },
+  { path: 'rsvp', component: RsvpComponent },
+  { path: 'photos', component: PhotosComponent},
+  { path: 'contact', component: ContactComponent }
+//  { path: '**', component: NotFoundComponent }
+//   { path: 'about', component: AboutComponent },
+//   { path: 'contact', component: ContactComponent }
+];
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    BodyComponent,
-    ContactComponent,
-    FyiComponent,
-    PhotosComponent,
-    RsvpComponent,
-    NotfoundComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-	HttpClientModule
-  ],
-  providers: [RsvpService],
-  bootstrap: [AppComponent]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-export class AppModule { }
+export class AppRoutingModule { }

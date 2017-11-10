@@ -89,12 +89,12 @@
                     <label class="radio">
                       <input type="radio" name="member">
                       I would never deam of missing it! After all, knowing the 
-                      <select [(ngModel)]="favoriteFamily">
-                          <option *ngFor="let name of familyNames" [ngValue]="name">{{name}}</option>
+                      <select>
+                          <option *ngFor="let name of familyNames">{{name}}</option>
                       </select>
                       family, this should be a day full of must-see 
-                      <select [(ngModel)]="yesAjective">
-                          <option *ngFor="let adj of yesAdjectives" [ngValue]="adj">{{adj}}</option>
+                      <select>
+                          <option *ngFor="let adj of yesAdjectives">{{adj}}</option>
                       </select>
                     </label>
                   </div>

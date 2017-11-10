@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'photos-component',
-  templateUrl: './photos.component.html'
+  selector: 'app-photos',
+  templateUrl: './photos.component.html',
+  styles: [],
+  encapsulation: ViewEncapsulation.None
 })
-
 export class PhotosComponent {
   public photoAlbums: photoAlbumModel[] = [
     {title: "2017 Breckenridge", image: "/assets/images/breckenridge.jpg", url: "https://goo.gl/photos/ah2jUs2fVxkyhY3p6"},
@@ -19,3 +20,4 @@ class photoAlbumModel {
   image: string;
   url: string;
 }
+

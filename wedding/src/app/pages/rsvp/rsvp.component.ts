@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
-import { RsvpService } from './../rsvp.service';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+
+import { RsvpService } from './../../services/rsvp.service';
 
 @Component({
-  selector: 'rsvp-component',
-  templateUrl: './rsvp.component.html'
+  selector: 'app-rsvp',
+  templateUrl: './rsvp.component.html',
+  styles: [],
+  encapsulation: ViewEncapsulation.None
 })
-
 export class RsvpComponent {
 
-  public rsvpCode: string = "";
+    public rsvpCode: string = "";
   public stage: number = 0;
   private attending: boolean = null;
   public rsvpAnswer: rsvpAnswers;
@@ -26,12 +28,12 @@ export class RsvpComponent {
 
 
   constructor(private RsvpService: RsvpService){ 
-    this.RsvpService.verifyApiStatus().then(data => {
-      this.isApiOk = true;   
-    }).catch(e => {
-      this.isApiOk = false;
-      console.log('ApiStatus Bad: '+ e);     
-    });
+     this.RsvpService.verifyApiStatus(); //.then(data => {
+    //   this.isApiOk = true;   
+    // }).catch(e => {
+    //   this.isApiOk = false;
+    //   console.log('ApiStatus Bad: '+ e);     
+    // });
    }
   
   public areYouAttending(isAttending: boolean) {

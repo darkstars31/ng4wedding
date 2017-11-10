@@ -1,10 +1,10 @@
-import { WeddingPage } from './app.po';
+import { AppPage } from './app.po';
 
 describe('wedding App', () => {
-  let page: WeddingPage;
+  let page: AppPage;
 
   beforeEach(() => {
-    page = new WeddingPage();
+    page = new AppPage();
   });
 
   it('should display welcome message', () => {

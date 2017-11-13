@@ -15,6 +15,8 @@ import { RsvpComponent } from './pages/rsvp/rsvp.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
 
 import { RsvpService } from './services/rsvp.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http/src/interceptor';
+import { AuthInterceptor } from './http.interceptor';
 
 
 
@@ -33,9 +35,11 @@ import { RsvpService } from './services/rsvp.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-	HttpClientModule
+    HttpClientModule
   ],
-  providers: [RsvpService],
+  providers: [
+    RsvpService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

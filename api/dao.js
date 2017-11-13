@@ -9,6 +9,10 @@ var dao = {
     get: function (value) {
         
         return dbContext.ref(value).once('value').catch(e => console.log(e));
+    },
+
+    ref: function (value) {
+        return dbContext.ref(value);
     }
 }
 

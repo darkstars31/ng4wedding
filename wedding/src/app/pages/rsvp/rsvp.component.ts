@@ -28,12 +28,12 @@ export class RsvpComponent {
 
 
   constructor(private RsvpService: RsvpService){ 
-     this.RsvpService.verifyApiStatus(); //.then(data => {
-    //   this.isApiOk = true;   
-    // }).catch(e => {
-    //   this.isApiOk = false;
-    //   console.log('ApiStatus Bad: '+ e);     
-    // });
+     this.RsvpService.verifyApiStatus().then(data => {
+      this.isApiOk = true;   
+    }).catch(e => {
+      this.isApiOk = false;
+      console.log('ApiStatus Bad: '+ e);     
+    });
    }
   
   public areYouAttending(isAttending: boolean) {
@@ -50,9 +50,9 @@ export class RsvpComponent {
     this.inputError = false;
     this.isLoading = true;
     this.RsvpService.verifyRsvpCode(rsvpCode).then(accessToken => {   
+      console.log(accessToken);
       if(accessToken) {
         this.rsvpCode = rsvpCode;
-        localStorage.setItem('accessToken', accessToken);
         this.stage = 1;
       } else {
         this.inputError = true;

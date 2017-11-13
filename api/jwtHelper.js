@@ -10,7 +10,7 @@ var jwtHelper = {
     validate: (req, res, next) => {
         try {
           var key = fs.readFileSync(__dirname + '/keys/public_key.pem');
-          jwt.verify(req.headers.authorization,key);
+          jwt.verify(req.headers.authorization.replace(/"/g,''),key);
         } catch (e) {
           logger.error('Token validation failure, Reason:' + e);
           logger.error('Failed Token:' + req.headers.authorization);

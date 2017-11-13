@@ -48,9 +48,7 @@ app.get('/rsvp/:code', (req, res, next) => {
         res.send(snapshot.exists()); 
       } 
     }).catch(e => {
-      console.log(e);
-      res.status(503);
-      res.send("Error: "+ e);
+      InternalServerError(res, e);
     });    
 });
 
@@ -58,17 +56,23 @@ app.patch('/rsvp/:code', jwtHelper.validate, (req, res, next) => {
   dao.get('/rsvp/families/'+req.params.code).then((snapshot) => {
     if(snapshot.exists()) {
       try{
-        var family = dbContext.ref('/rsvp/families/');
+        var family = dao.ref('/rsvp/families/');
         family.child(req.params.code).update(req.body);
         res.send(true);
       } catch(e){
-        logger.error("Failure updating Family: "+req.params.code+" with data "+ JSON.stringify(req.body));
+        InternalServerError(res, e);
       }
     } else {
       res.send(false);
     }
   });    
 });
+
+function InternalServerError(res, e){
+  console.log('Exception Caught: ' + e);
+  res.status(503);
+  res.send("Internal Server Error. Message: " + e);
+}
 
   
 app.listen(config.express.port);

@@ -15,17 +15,19 @@
                 Unfortunately this feature is not enabled yet.
             </h2>
             <br>
-            <div class="field has-addons">
-                <div class="control is-expanded has-text-centered">
-                    <!-- <input #rsvpCode class="input is-large" type="text" placeholder="Psst, type RSVP code in this box!" /> -->
-                    <input #rsvpCode class="input is-large" [ngClass]="{'is-danger': inputError}" type="text" placeholder="You will receive your code in the mail. Thanks for your patience." />
-                </div>
-                <div class="control">
-                    <a (click)="submitRsvpCode(rsvpCode.value); rsvpCode.value = ''" class="button is-large is-danger is-outlined" [attr.disabled]="isApiOk ? null : 'disabled'">
-                        RSVP
-                    </a>
+              
+              <div class="field has-addons">
+                  <div class="control is-expanded has-text-centered">
+                      <!-- <input #rsvpCode class="input is-large" type="text" placeholder="Psst, type RSVP code in this box!" /> -->
+                      <input #rsvpCode (keyUp)="onKey($event)" class="input is-large" [ngClass]="{'is-danger': inputError}" type="text" placeholder="You will receive your code in the mail. Thanks for your patience." />
                   </div>
-            </div> 
+                  <div class="control">
+                      <a (click)="submitRsvpCode(rsvpCode.value); rsvpCode.value = ''" class="button is-large is-danger is-outlined" [attr.disabled]="isApiOk ? null : 'disabled'">
+                          RSVP
+                      </a>
+                    </div>
+              </div> 
+            
             <div class="notification is-danger" style="position: absolute" *ngIf="inputError == true">
                 <button class="delete" (click)="removeNotification('inputError')"></button>
                 We couldn't find your code in our Répondez s'il vous plaît catalog. <strong>Please try again</strong>, if the issue perists please email tony@tonysanti.com
@@ -60,7 +62,7 @@
           </div> 
       </div>       
 
-      <div *ngIf="stage == 2" class="columns is-vcentered">
+      <div *ngIf="stage == 2" class="columns ">
           <div class="column is-12">
           <h1 class="title is-4">
               Nice Work Kid!
@@ -70,35 +72,80 @@
           </h2>                  
             
             <div *ngIf="attending == true" class="field is-horizontal">
-              <div class="field-label">
-                <label class="label" style="color:white">Yes! I will be attending because</label>
-              </div>
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
-                    <label class="radio">
-                      <input type="radio" name="member">
-                      Two words: Free Booze!
-                    </label>
-                    <br />
-                    <label class="radio">
-                      <input type="radio" name="member">
-                      I'm in your wedding party, idiot. Wait, is this optional?
-                    </label>
-                    <br />
-                    <label class="radio">
-                      <input type="radio" name="member">
-                      I would never deam of missing it! After all, knowing the 
-                      <select>
-                          <option *ngFor="let name of familyNames">{{name}}</option>
-                      </select>
-                      family, this should be a day full of must-see 
-                      <select>
-                          <option *ngFor="let adj of yesAdjectives">{{adj}}</option>
-                      </select>
-                    </label>
+              <div class="container">
+                <div class="field-label column is-3">
+                  <label class="label" style="color:white">Yes! I will be attending because</label>
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <div class="control">
+                      <label class="radio">
+                        <input type="radio" name="member" [value]="1" [(ngModel)]="questionaire.attendingReason">
+                        Two words: Free Booze!
+                      </label>
+                      <br />
+                      <label class="radio">
+                        <input type="radio" name="member" [value]="2" [(ngModel)]="questionaire.attendingReason">
+                        I'm in your wedding party, idiot. Wait, is this optional?
+                      </label>
+                      <br />
+                      <label class="radio">
+                        <input type="radio" name="member" [value]="3" [(ngModel)]="questionaire.attendingReason">
+                        I would never deam of missing it! After all, knowing the 
+                        <select>
+                            <option *ngFor="let name of familyNames">{{name}}</option>
+                        </select>
+                        family, this should be a day full of must-see 
+                        <select>
+                            <option *ngFor="let adj of yesAdjectives">{{adj}}</option>
+                        </select>
+                      </label>
+                    </div>
                   </div>
                 </div>
+
+                <div class="field-label column is-3">
+                  <label class="label" style="color:white">Which of these do you prefer</label>
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <div class="control">
+                      <label class="radio">
+                        <input type="radio" name="member" [value]="1" [(ngModel)]="questionaire.scifiPreference">
+                        Starwars (even though no one really liked the prequals anyways!)
+                      </label>
+                      <br />
+                      <label class="radio">
+                        <input type="radio" name="member" [value]="2" [(ngModel)]="questionaire.scifiPreference">
+                        Startrek (but lets just pretend that weird series of Enterprise never happened)
+                      </label>
+                      <br />
+                      <label class="radio">
+                        <input type="radio" name="member" [value]="3" [(ngModel)]="questionaire.scifiPreference">
+                        Lord of the Rings (why were  their three hobbit movies again?)
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="field-label column is-3">
+                    <label class="label" style="color:white">Cake or Death?</label>
+                  </div>
+                  <div class="field-body">
+                    <div class="field">
+                      <div class="control">
+                        <label class="radio">
+                          <input type="radio" name="member" [value]="Cake" [(ngModel)]="questionaire.cakeOrDeath">
+                          Uhhh Cake Please!
+                        </label>
+                        <br />
+                        <label class="radio">
+                          <input type="radio" name="member" [value]="Death" [(ngModel)]="questionaire.scifiPreference">
+                          Death Please!
+                        </label>                       
+                      </div>
+                    </div>
+                  </div>
               </div>
             </div>
 
@@ -147,7 +194,7 @@
 
       <div *ngIf="stage == 3" class="columns is-vcentered">
         <div class="column is-12">
-        <h1 class="title is-4">
+        <h1 class="title is-12">
             Your all done!
         </h1>
         <h2 class="subtitle is-8">

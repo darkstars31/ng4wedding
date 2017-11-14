@@ -10,7 +10,7 @@ import { RsvpService } from './../../services/rsvp.service';
 })
 export class RsvpComponent {
 
-    public rsvpCode: string = "";
+  public rsvpCode: string = "";
   public stage: number = 0;
   private attending: boolean = null;
   public rsvpAnswer: rsvpAnswers;
@@ -21,6 +21,12 @@ export class RsvpComponent {
 
   public favoriteFamily: string;
   public yesAdjective: string;
+
+  public questionaire: {
+    attendingReason,
+    cakeOrDeath,
+    scifiPreference
+  };
 
   public familyNames: string[] = ['Santi','Winberg'];
   public yesAdjectives: string[] = ['fun','drama', 'rediculousness'];
@@ -35,6 +41,10 @@ export class RsvpComponent {
       console.log('ApiStatus Bad: '+ e);     
     });
    }
+
+   public onKey(event: any) {
+     console.log(event);
+   }
   
   public areYouAttending(isAttending: boolean) {
     this.attending = isAttending;
@@ -42,7 +52,8 @@ export class RsvpComponent {
   }
 
   public finishAndUpdate() {
-    this.RsvpService.updateRsvpData(this.rsvpCode, {"attending": this.attending});
+    console.log(this.questionaire);
+    this.RsvpService.updateRsvpData(this.rsvpCode, {"attending": this.attending, "questionaire": this.questionaire});
     this.stage = 3;
   }
 
@@ -50,7 +61,6 @@ export class RsvpComponent {
     this.inputError = false;
     this.isLoading = true;
     this.RsvpService.verifyRsvpCode(rsvpCode).then(accessToken => {   
-      console.log(accessToken);
       if(accessToken) {
         this.rsvpCode = rsvpCode;
         this.stage = 1;

@@ -13,6 +13,11 @@ export class RsvpService {
         console.error('An Error occurred', error);
         return Promise.reject(error.message || error);   
     }
+
+    private createHeaders(): HttpHeaders {
+        return new HttpHeaders().set('Authorization', localStorage.getItem('accessToken'))
+                .set('Content-Type', 'Application/Json');
+    }
    
     public verifyApiStatus(): Promise<any> {
         const url = `${this.url}/health`;      
@@ -28,6 +33,7 @@ export class RsvpService {
 
     public updateRsvpData(rsvpCode: string, data: object): Promise<any> {       
         const url = `${this.url}/${rsvpCode}`;
-        return this.http.patch(url, JSON.stringify(data), { headers: new HttpHeaders().set('Authorization', localStorage.getItem('accessToken'))}).toPromise().catch(this.handleError);     
+        return this.http.patch(url, data, { headers: this.createHeaders()})
+        .toPromise().catch(this.handleError);     
     }
 }

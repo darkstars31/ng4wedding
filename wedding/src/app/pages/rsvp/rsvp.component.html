@@ -80,17 +80,17 @@
                   <div class="field">
                     <div class="control">
                       <label class="radio">
-                        <input type="radio" name="member" [value]="1" [(ngModel)]="questionaire.attendingReason">
+                        <input type="radio" name="member" [value]="1" [(ngModel)]="RsvpQuestionaire.attendingReason">
                         Two words: Free Booze!
                       </label>
                       <br />
                       <label class="radio">
-                        <input type="radio" name="member" [value]="2" [(ngModel)]="questionaire.attendingReason">
+                        <input type="radio" name="member" [value]="2" [(ngModel)]="RsvpQuestionaire.attendingReason">
                         I'm in your wedding party, idiot. Wait, is this optional?
                       </label>
                       <br />
                       <label class="radio">
-                        <input type="radio" name="member" [value]="3" [(ngModel)]="questionaire.attendingReason">
+                        <input type="radio" name="member" [value]="3" [(ngModel)]="RsvpQuestionaire.attendingReason">
                         I would never deam of missing it! After all, knowing the 
                         <select>
                             <option *ngFor="let name of familyNames">{{name}}</option>
@@ -111,17 +111,17 @@
                   <div class="field">
                     <div class="control">
                       <label class="radio">
-                        <input type="radio" name="member" [value]="1" [(ngModel)]="questionaire.scifiPreference">
+                        <input type="radio" name="member" [value]="1" [(ngModel)]="RsvpQuestionaire.scifiPreference">
                         Starwars (even though no one really liked the prequals anyways!)
                       </label>
                       <br />
                       <label class="radio">
-                        <input type="radio" name="member" [value]="2" [(ngModel)]="questionaire.scifiPreference">
+                        <input type="radio" name="member" [value]="2" [(ngModel)]="RsvpQuestionaire.scifiPreference">
                         Startrek (but lets just pretend that weird series of Enterprise never happened)
                       </label>
                       <br />
                       <label class="radio">
-                        <input type="radio" name="member" [value]="3" [(ngModel)]="questionaire.scifiPreference">
+                        <input type="radio" name="member" [value]="3" [(ngModel)]="RsvpQuestionaire.scifiPreference">
                         Lord of the Rings (why were  their three hobbit movies again?)
                       </label>
                     </div>
@@ -135,12 +135,12 @@
                     <div class="field">
                       <div class="control">
                         <label class="radio">
-                          <input type="radio" name="member" [value]="Cake" [(ngModel)]="questionaire.cakeOrDeath">
+                          <input type="radio" name="member" [value]="Cake" [(ngModel)]="RsvpQuestionaire.cakeOrDeath">
                           Uhhh Cake Please!
                         </label>
                         <br />
                         <label class="radio">
-                          <input type="radio" name="member" [value]="Death" [(ngModel)]="questionaire.scifiPreference">
+                          <input type="radio" name="member" [value]="Death" [(ngModel)]="RsvpQuestionaire.scifiPreference">
                           Death Please!
                         </label>                       
                       </div>

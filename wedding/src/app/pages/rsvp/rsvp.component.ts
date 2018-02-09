@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-
 import { RsvpService } from './../../services/rsvp.service';
+import { RsvpQuestionaire } from './rsvpquestionaire.model'
 
 @Component({
   selector: 'app-rsvp',
@@ -13,7 +13,7 @@ export class RsvpComponent {
   public rsvpCode: string = "";
   public stage: number = 0;
   private attending: boolean = null;
-  public rsvpAnswer: rsvpAnswers;
+  public rsvpAnswer: rsvpAnswers; 
 
   public isApiOk: boolean = null;
   public isLoading: boolean = false;
@@ -22,18 +22,12 @@ export class RsvpComponent {
   public favoriteFamily: string;
   public yesAdjective: string;
 
-  public questionaire: {
-    attendingReason,
-    cakeOrDeath,
-    scifiPreference
-  };
-
   public familyNames: string[] = ['Santi','Winberg'];
   public yesAdjectives: string[] = ['fun','drama', 'rediculousness'];
 
+  public RsvpQuestionaire: RsvpQuestionaire;
 
-
-  constructor(private RsvpService: RsvpService){ 
+  constructor(private RsvpService: RsvpService){
      this.RsvpService.verifyApiStatus().then(data => {
       this.isApiOk = true;   
     }).catch(e => {
@@ -52,8 +46,8 @@ export class RsvpComponent {
   }
 
   public finishAndUpdate() {
-    console.log(this.questionaire);
-    this.RsvpService.updateRsvpData(this.rsvpCode, {"attending": this.attending, "questionaire": this.questionaire});
+    console.log(this.RsvpQuestionaire);
+    this.RsvpService.updateRsvpData(this.rsvpCode, {"attending": this.attending, "questionaire": this.RsvpQuestionaire});
     this.stage = 3;
   }
 

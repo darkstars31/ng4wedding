@@ -38,7 +38,7 @@ app.get('/health', (req,res,next) => {
 });
 
 app.get('/rsvp/:code', (req, res, next) => {
-    dao.get('/rsvp/families/'+req.params.code).then((snapshot) => {
+    dao.get('/rsvp/families/'+req.params.code.toLowerCase()).then((snapshot) => {
       if(snapshot.exists()){
         res.send({ 
           "accessToken": jwtHelper.generate(req.params.code)

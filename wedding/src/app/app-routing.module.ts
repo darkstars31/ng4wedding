@@ -9,6 +9,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { FyiComponent } from './pages/fyi/fyi.component';
 import { PhotosComponent } from './pages/photos/photos.component';
 import { RsvpComponent } from './pages/rsvp/rsvp.component';
+import { RegistryComponent } from './pages/registry/registry.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
 
 const routes: Routes = [
@@ -16,10 +17,9 @@ const routes: Routes = [
   { path: 'fyi', component: FyiComponent },
   { path: 'rsvp', component: RsvpComponent },
   { path: 'photos', component: PhotosComponent},
-  { path: 'contact', component: ContactComponent }
-//  { path: '**', component: NotFoundComponent }
-//   { path: 'about', component: AboutComponent },
-//   { path: 'contact', component: ContactComponent }
+  { path: 'registry', component: RegistryComponent},
+  { path: 'contact', component: ContactComponent },
+  { path: '**', redirectTo: "" }
 ];
 
 

@@ -14,7 +14,7 @@ log4js.configure(config.log4jsConfig);
 
 app.use((req, res, next) => {
   var origin = req.get('origin');
-  console.log(origin);
+  console.log('Origin:' ,origin);
   if(config.express.allowedOrigins.some((item) => origin.includes(item))){
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
@@ -31,10 +31,19 @@ console.log('Allowing Origins:'+ config.express.allowedOrigins);
 
 app.get('/health', (req,res,next) => {
   dao.get('/rsvp/health').then((snapshot) => {
-    console.log('health');
+    if(snapshot.exists()){
+      console.log('health');
+    } else {
+      console.log('Not Exists');
+    }
+
     res.status(200);
     res.send(snapshot);
-  }).catch(e => console.log(e));    
+  }).catch(e => {
+    console.log(e);
+    res.status(503);
+    res.send(false);
+  });    
 });
 
 app.get('/rsvp/:code', (req, res, next) => {

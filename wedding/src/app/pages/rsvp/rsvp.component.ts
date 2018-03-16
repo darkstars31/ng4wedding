@@ -28,8 +28,13 @@ export class RsvpComponent {
   public RsvpQuestionaire: RsvpQuestionaire;
 
   constructor(private RsvpService: RsvpService){
-     this.RsvpService.verifyApiStatus().then(data => {
-      this.isApiOk = true;   
+      this.RsvpService.verifyApiStatus().then(data => {
+        console.log(data);
+      if(data) {
+        this.isApiOk = true;   
+      } else {
+        this.isApiOk = false;
+      }
     }).catch(e => {
       this.isApiOk = false;
       console.log('ApiStatus Bad: '+ e);     

@@ -20,6 +20,7 @@ export class RsvpService {
     }
    
     public verifyApiStatus(): Promise<any> {
+        console.log(this.url);
         const url = `${this.url}/health`;      
         return this.http.get(url, { observe: 'body'}).toPromise().catch(this.handleError);              
     }

@@ -32,9 +32,9 @@
                 <button class="delete" (click)="removeNotification('inputError')"></button>
                 We couldn't find your code in our Répondez s'il vous plaît catalog. <strong>Please try again</strong>, if the issue perists please email tony@tonysanti.com
             </div>
-            <div class="notification is-warning is-vcentered" style="position: absolute" *ngIf="isApiOk == false">
-              <!-- <button class="delete" (click)="removeNotification('isApiOk')"></button> -->
-              <a href="https://www.google.com/search?q=R%C3%A9pondez+s%27il+vous+pla%C3%AEt">Répondez s'il vous plaît system</a> is currently disabled. This feature will be enabled shortly before you recieve your RVSP in the mail. <strong>Please come back later</strong>
+            <div class="notification is-warning is-vcentered" style="position: absolute" *ngIf="isApiOk == false" [innerHtml]="errorMessage">
+              <button class="delete" (click)="removeNotification('isApiOk')"></button>
+              
             </div>
           </div>           
       </div>
@@ -42,23 +42,62 @@
       <div *ngIf="stage == 1" class="columns is-vcentered">
           <div class="column is-12">
           <h1 class="title is-4">
-              Will you be attending?
+              Will you be attending our wedding?
           </h1>
           <br />
-          <h2 class="subtitle is-8">
-              <a (click)="areYouAttending(true)" class="button is-large is-success">
-                  <span class="icon is-medium">
-                    <i class="fa fa-check-square-o"></i>
-                  </span>
-                  <span>Yes</span>
-                </a>
-                <a (click)="areYouAttending(false)" class="button is-large is-danger">
-                    <span class="icon is-medium">
-                      <i class="fa fa-times-circle-o"></i>
-                    </span>
-                    <span>No</span>
-                  </a>
-          </h2>       
+          <form #attendingReasonForm="ngForm" (ngSubmit)="onSubmit(attendingReasonForm)">
+          <div class="columns is-3">
+            <div class="column">
+                <strong>Yes...</strong>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <label class="radio">
+                      <input type="radio" name="member" [(ngModel)]="attendingReason">
+                      Will attend with pleasure!
+                    </label>
+                    <br />
+                    <label class="radio">
+                      <input type="radio" name="member"  [(ngModel)]="attendingReason">
+                      Accepts invitation with regret. :(
+                    </label>
+                    <br />
+                    <label class="radio">
+                      <input type="radio" name="member" [(ngModel)]="attendingReason">
+                      Decline to respond but attend anyway.
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>  
+            <div class="column ">
+                <strong>No...</strong>
+
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <label class="radio">
+                      <input type="radio" name="member"  [(ngModel)]="attendingReason">
+                      Regretfully decline to attend
+                    </label>
+                    <br />
+                    <label class="radio">
+                      <input type="radio" name="member"  [(ngModel)]="attendingReason">
+                      Declines invitation with enthusiasm.
+                    </label>
+                    <br />
+                    <label class="radio">
+                      <input type="radio" name="member"  [(ngModel)]="attendingReason">
+                      No - Other uncreative reason.
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>    
+        </div> 
+        <button type="submit" class="button">Next</button>            
+ 
+      </form> 
           </div> 
       </div>       
 
@@ -74,106 +113,10 @@
             <div *ngIf="attending == true" class="field is-horizontal">
               <div class="container">
                 <div class="field-label column is-3">
-                  <label class="label" style="color:white">Yes! I will be attending because</label>
-                </div>
-                <div class="field-body">
-                  <div class="field">
-                    <div class="control">
-                      <label class="radio">
-                        <input type="radio" name="member" [value]="1" [(ngModel)]="RsvpQuestionaire.attendingReason">
-                        Two words: Free Booze!
-                      </label>
-                      <br />
-                      <label class="radio">
-                        <input type="radio" name="member" [value]="2" [(ngModel)]="RsvpQuestionaire.attendingReason">
-                        I'm in your wedding party, idiot. Wait, is this optional?
-                      </label>
-                      <br />
-                      <label class="radio">
-                        <input type="radio" name="member" [value]="3" [(ngModel)]="RsvpQuestionaire.attendingReason">
-                        I would never deam of missing it! After all, knowing the 
-                        <select>
-                            <option *ngFor="let name of familyNames">{{name}}</option>
-                        </select>
-                        family, this should be a day full of must-see 
-                        <select>
-                            <option *ngFor="let adj of yesAdjectives">{{adj}}</option>
-                        </select>
-                      </label>
-                    </div>
-                  </div>
+                  <label class="label" style="color:white">Song that will get you dancing</label>
+                  <input #songName class="input is-large" type="text" placeholder="Song Name / Band" />
                 </div>
 
-                <div class="field-label column is-3">
-                  <label class="label" style="color:white">Which of these do you prefer</label>
-                </div>
-                <div class="field-body">
-                  <div class="field">
-                    <div class="control">
-                      <label class="radio">
-                        <input type="radio" name="member" [value]="1" [(ngModel)]="RsvpQuestionaire.scifiPreference">
-                        Starwars (even though no one really liked the prequals anyways!)
-                      </label>
-                      <br />
-                      <label class="radio">
-                        <input type="radio" name="member" [value]="2" [(ngModel)]="RsvpQuestionaire.scifiPreference">
-                        Startrek (but lets just pretend that weird series of Enterprise never happened)
-                      </label>
-                      <br />
-                      <label class="radio">
-                        <input type="radio" name="member" [value]="3" [(ngModel)]="RsvpQuestionaire.scifiPreference">
-                        Lord of the Rings (why were  their three hobbit movies again?)
-                      </label>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="field-label column is-3">
-                    <label class="label" style="color:white">Cake or Death?</label>
-                  </div>
-                  <div class="field-body">
-                    <div class="field">
-                      <div class="control">
-                        <label class="radio">
-                          <input type="radio" name="member" [value]="Cake" [(ngModel)]="RsvpQuestionaire.cakeOrDeath">
-                          Uhhh Cake Please!
-                        </label>
-                        <br />
-                        <label class="radio">
-                          <input type="radio" name="member" [value]="Death" [(ngModel)]="RsvpQuestionaire.scifiPreference">
-                          Death Please!
-                        </label>                       
-                      </div>
-                    </div>
-                  </div>
-              </div>
-            </div>
-
-            <div *ngIf="attending == false" class="field is-horizontal">
-              <div class="field-label">
-                <label class="label" style="color:white">No. I won't be attending because</label>
-              </div>
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
-                    <label class="radio">
-                      <input type="radio" name="member">
-                      No - Because I only really like one of you (you know who you are).
-                    </label>
-                    <br />
-                    <label class="radio">
-                      <input type="radio" name="member">
-                      No - Weddings make me sad, because nobody loves me.
-                    </label>
-                    <br />
-                    <label class="radio">
-                      <input type="radio" name="member">
-                      No - Other uncreative reason.
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
             
             <div class="field is-horizontal">
               <div class="field-label">

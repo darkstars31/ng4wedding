@@ -13,31 +13,28 @@ export class RsvpComponent {
   public rsvpCode: string = "";
   public stage: number = 0;
   private attending: boolean = null;
+  public attendingReason: string;
   public rsvpAnswer: rsvpAnswers; 
 
   public isApiOk: boolean = null;
   public isLoading: boolean = false;
   public inputError: boolean = false;
+  public errorMessage: string;
 
   public favoriteFamily: string;
   public yesAdjective: string;
 
-  public familyNames: string[] = ['Santi','Winberg'];
-  public yesAdjectives: string[] = ['fun','drama', 'rediculousness'];
 
   public RsvpQuestionaire: RsvpQuestionaire;
 
   constructor(private RsvpService: RsvpService){
-      this.RsvpService.verifyApiStatus().then(data => {
-        console.log(data);
-      if(data) {
-        this.isApiOk = true;   
-      } else {
-        this.isApiOk = false;
-      }
-    }).catch(e => {
+    this.RsvpService.verifyApiStatus().then(data => {
+		this.isApiOk = data.health;   
+		this.errorMessage = `<a href="https://www.google.com/search?q=R%C3%A9pondez+s%27il+vous+pla%C3%AEt">Répondez s'il vous plaît system</a> is currently disabled. This feature will be enabled shortly before you recieve your RVSP in the mail. <strong>Please come back later</strong>`;
+
+    }, error => {
       this.isApiOk = false;
-      console.log('ApiStatus Bad: '+ e);     
+      console.log('ApiStatus Bad: '+ error);     
     });
    }
 
@@ -59,15 +56,27 @@ export class RsvpComponent {
   public submitRsvpCode (rsvpCode: string): void {
     this.inputError = false;
     this.isLoading = true;
-    this.RsvpService.verifyRsvpCode(rsvpCode).then(accessToken => {   
-      if(accessToken) {
-        this.rsvpCode = rsvpCode;
-        this.stage = 1;
-      } else {
-        this.inputError = true;
-        this.isLoading = false;
-      }
-    });
+    if(this.isApiOk) {
+      this.RsvpService.verifyRsvpCode(rsvpCode).then(accessToken => {   
+        if(accessToken ) {
+          this.rsvpCode = rsvpCode;
+          this.stage = 1;
+        } else {
+          this.inputError = true;
+          this.isLoading = false;
+        }
+      });
+    } else {
+		this.errorMessage = `Don't press that button yet!`;
+	}
+  }
+
+  public onSubmit(form) {
+	console.log('Form', form);
+	  if(form.$valid) {
+		  console.log('Form is Valid');
+		  
+	  }
   }
 
   public removeNotification(event): void {

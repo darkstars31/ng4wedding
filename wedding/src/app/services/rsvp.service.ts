@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class RsvpService {
 
-   private url = location.href.includes('tonysanti.com') == true ? 'http://40.77.25.47:3031/rsvp' : 'http://localhost:3031/rsvp';
+   private url = location.href.includes('tonysanti.com') == true ? 'http://40.77.25.47:3031' : 'http://localhost:3031';
     
     constructor(private http: HttpClient) {}
 
@@ -20,20 +21,19 @@ export class RsvpService {
     }
    
     public verifyApiStatus(): Promise<any> {
-        console.log(this.url);
-        const url = `${this.url}/health`;      
-        return this.http.get(url, { observe: 'body'}).toPromise().catch(this.handleError);              
+        const url = `${this.url}/health`;   
+        return this.http.get(url).toPromise();              
     }
 
     public verifyRsvpCode(rsvpCode: string): Promise<string> {      
-        const url = `${this.url}/${rsvpCode}`;
+        const url = `${this.url}/rsvp/${rsvpCode}`;
         var accessToken = this.http.get<string>(url, { observe: 'body'}).toPromise().catch(this.handleError);      
         accessToken.then(response => localStorage.setItem('accessToken', response['accessToken']));
         return accessToken;
     }
 
     public updateRsvpData(rsvpCode: string, data: object): Promise<any> {       
-        const url = `${this.url}/${rsvpCode}`;
+        const url = `${this.url}/rsvp/${rsvpCode}`;
         return this.http.patch(url, data, { headers: this.createHeaders()})
         .toPromise().catch(this.handleError);     
     }

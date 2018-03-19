@@ -15,15 +15,17 @@ log4js.configure(config.log4jsConfig);
 app.use((req, res, next) => {
   var origin = req.get('origin');
   console.log('Origin:' ,origin);
-  if(config.express.allowedOrigins.some((item) => origin.includes(item))){
+  if( !origin || config.express.allowedOrigins.some((item) => origin.includes(item))){
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH');
+    res.header("Content-Type","application/json")
     next();
   } else {
     res.status(401);
     res.send('Not in the allowed origins list.');
   }
+  
 });
 
 console.log('Listening on localhost:'+ config.express.port);
@@ -31,18 +33,12 @@ console.log('Allowing Origins:'+ config.express.allowedOrigins);
 
 app.get('/health', (req,res,next) => {
   dao.get('/rsvp/health').then((snapshot) => {
-    if(snapshot.exists()){
-      console.log('health');
-    } else {
-      console.log('Not Exists');
-    }
-
     res.status(200);
-    res.send(snapshot);
+    res.send({ health: snapshot });
   }).catch(e => {
     console.log(e);
     res.status(503);
-    res.send(false);
+    res.send({ health: 'false' });
   });    
 });
 
@@ -77,6 +73,14 @@ app.patch('/rsvp/:code', jwtHelper.validate, (req, res, next) => {
       res.send(false);
     }
   });    
+
+});
+
+app.use(function (req, res, next) {
+  res.status(404).send(`404 No Route Match for ${req.url}`);
+  if(res.status(404)){
+    console.log(`404 No Route Match`);
+  }
 });
 
 function InternalServerError(res, e){

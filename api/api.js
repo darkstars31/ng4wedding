@@ -76,12 +76,12 @@ app.patch('/rsvp/:code', jwtHelper.validate, (req, res, next) => {
 
 });
 
-app.use(function (req, res, next) {
-  res.status(404).send(`404 No Route Match for ${req.url}`);
-  if(res.status(404)){
-    console.log(`404 No Route Match`);
-  }
-});
+// app.use(function (req, res, next) {
+//   res.status(404).send(`404 No Route Match for ${req.url}`);
+//   if(res.status(404)){
+//     console.log(`404 No Route Match`);
+//   }
+// });
 
 function InternalServerError(res, e){
   console.log('Exception Caught: ' + e);

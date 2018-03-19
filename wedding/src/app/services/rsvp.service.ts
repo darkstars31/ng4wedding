@@ -21,19 +21,19 @@ export class RsvpService {
     }
    
     public verifyApiStatus(): Promise<any> {
-        const url = `${this.url}/health`;   
+        let url = `${this.url}/health`;   
         return this.http.get(url).toPromise();              
     }
 
     public verifyRsvpCode(rsvpCode: string): Promise<string> {      
-        const url = `${this.url}/rsvp/${rsvpCode}`;
+        let url = `${this.url}/rsvp/${rsvpCode}`;
         var accessToken = this.http.get<string>(url, { observe: 'body'}).toPromise().catch(this.handleError);      
         accessToken.then(response => localStorage.setItem('accessToken', response['accessToken']));
         return accessToken;
     }
 
     public updateRsvpData(rsvpCode: string, data: object): Promise<any> {       
-        const url = `${this.url}/rsvp/${rsvpCode}`;
+        let url = `${this.url}/rsvp/${rsvpCode}`;
         return this.http.patch(url, data, { headers: this.createHeaders()})
         .toPromise().catch(this.handleError);     
     }

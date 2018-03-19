@@ -12,17 +12,15 @@ export class RsvpComponent {
 
   public rsvpCode: string = "";
   public stage: number = 0;
-  private attending: boolean = null;
+  private isAttending: boolean = null;
   public attendingReason: string;
-  public rsvpAnswer: rsvpAnswers; 
+  public songName: string;
 
   public isApiOk: boolean = null;
   public isLoading: boolean = false;
   public inputError: boolean = false;
   public errorMessage: string;
 
-  public favoriteFamily: string;
-  public yesAdjective: string;
 
 
   public RsvpQuestionaire: RsvpQuestionaire;
@@ -41,15 +39,11 @@ export class RsvpComponent {
    public onKey(event: any) {
      console.log(event);
    }
-  
-  public areYouAttending(isAttending: boolean) {
-    this.attending = isAttending;
-    this.stage = 2;
-  }
 
-  public finishAndUpdate() {
-    console.log(this.RsvpQuestionaire);
-    this.RsvpService.updateRsvpData(this.rsvpCode, {"attending": this.attending, "questionaire": this.RsvpQuestionaire});
+
+  public finishAndUpdate(songName: string) {   
+	console.log('songName:',songName);
+    this.RsvpService.updateRsvpData(this.rsvpCode, {"attending": this.isAttending, "attendingReason": this.attendingReason, "songName": songName});
     this.stage = 3;
   }
 
@@ -58,7 +52,7 @@ export class RsvpComponent {
     this.isLoading = true;
     if(this.isApiOk) {
       this.RsvpService.verifyRsvpCode(rsvpCode).then(accessToken => {   
-        if(accessToken ) {
+        if(accessToken) {
           this.rsvpCode = rsvpCode;
           this.stage = 1;
         } else {
@@ -69,6 +63,12 @@ export class RsvpComponent {
     } else {
 		this.errorMessage = `Don't press that button yet!`;
 	}
+  }
+
+  public attendingButton(event){
+	this.isAttending = event.target.className.indexOf('primary') > -1;
+	this.attendingReason = event.target.innerText;
+	this.stage = 2;
   }
 
   public onSubmit(form) {
@@ -83,10 +83,4 @@ export class RsvpComponent {
     this[event] = !this[event];    
   }
 
-}
-
-class rsvpAnswers {
-  attending: boolean = false;
-  favoriteFamily: string = '';
-  yesAdjective: string = '';
 }

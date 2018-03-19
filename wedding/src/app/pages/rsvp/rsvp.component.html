@@ -45,75 +45,70 @@
               Will you be attending our wedding?
           </h1>
           <br />
-          <form #attendingReasonForm="ngForm" (ngSubmit)="onSubmit(attendingReasonForm)">
           <div class="columns is-3">
             <div class="column">
-                <strong>Yes...</strong>
+                <strong>Yes</strong>
               <div class="field-body">
                 <div class="field">
                   <div class="control">
-                    <label class="radio">
-                      <input type="radio" name="member" [(ngModel)]="attendingReason">
-                      Will attend with pleasure!
+                      <label class="radio" style="width: 100%; padding-bottom: 1em">
+                          <button style="width: 100%" (click)="attendingButton($event)" class="button is-large is-primary"> Will attend with pleasure! </button>
                     </label>
                     <br />
-                    <label class="radio">
-                      <input type="radio" name="member"  [(ngModel)]="attendingReason">
-                      Accepts invitation with regret. :(
+                    <label class="radio" style="width: 100%; padding-bottom: 1em">
+                        <button style="width: 100%" (click)="attendingButton($event)" class="button is-large is-primary">Accepts invitation with regret. </button>
                     </label>
                     <br />
-                    <label class="radio">
-                      <input type="radio" name="member" [(ngModel)]="attendingReason">
-                      Decline to respond but attend anyway.
+                    <label class="radio" style="width: 100%; padding-bottom: 1em">
+                        <button style="width: 100%" (click)="attendingButton($event)" class="button is-large is-primary"> Decline to respond but attend anyway. </button>
                     </label>
                   </div>
                 </div>
               </div>
             </div>  
             <div class="column ">
-                <strong>No...</strong>
+                <strong>No</strong>
 
               <div class="field-body">
                 <div class="field">
                   <div class="control">
-                    <label class="radio">
-                      <input type="radio" name="member"  [(ngModel)]="attendingReason">
-                      Regretfully decline to attend
+                      <label class="radio" style="width: 100%; padding-bottom: 1em">
+                          <button style="width: 100%" (click)="attendingButton($event)"class="button is-large is-danger">Regretfully decline to attend. </button>
+                      
                     </label>
                     <br />
-                    <label class="radio">
-                      <input type="radio" name="member"  [(ngModel)]="attendingReason">
-                      Declines invitation with enthusiasm.
+                    <label class="radio" style="width: 100%; padding-bottom: 1em">
+                        <button style="width: 100%" (click)="attendingButton($event)" class="button is-large is-danger">  Declines invitation with enthusiasm. </button>
+                     
                     </label>
                     <br />
-                    <label class="radio">
-                      <input type="radio" name="member"  [(ngModel)]="attendingReason">
-                      No - Other uncreative reason.
+                    <label class="radio" style="width: 100%; padding-bottom: 1em">
+                        <button style="width: 100%" (click)="attendingButton($event)" class="button is-large is-danger"> No - Other uncreative reason. </button>
+                    
                     </label>
                   </div>
                 </div>
               </div>
             </div>    
         </div> 
-        <button type="submit" class="button">Next</button>            
- 
-      </form> 
+
+   
           </div> 
       </div>       
 
       <div *ngIf="stage == 2" class="columns ">
           <div class="column is-12">
           <h1 class="title is-4">
-              Nice Work Kid!
+              One Last Question
           </h1>
           <h2 class="subtitle is-8">
-              Your code actually worked.
+              Give us a song that will help get you dancing
           </h2>                  
             
-            <div *ngIf="attending == true" class="field is-horizontal">
+            <div class="field is-horizontal">
               <div class="container">
-                <div class="field-label column is-3">
-                  <label class="label" style="color:white">Song that will get you dancing</label>
+                <div class="field-label column">
+                  <label class="label" style="color:white"></label>
                   <input #songName class="input is-large" type="text" placeholder="Song Name / Band" />
                 </div>
 

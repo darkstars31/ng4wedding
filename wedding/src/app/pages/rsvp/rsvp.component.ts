@@ -15,6 +15,10 @@ export class RsvpComponent {
   private isAttending: boolean = null;
   public attendingReason: string;
   public songName: string;
+  public hasErrorOccured: boolean = false;
+
+  public numAdults: number = 1;
+  public numChildren: number = 0;
 
   public isApiOk: boolean = null;
   public isLoading: boolean = false;
@@ -32,6 +36,7 @@ export class RsvpComponent {
 
     }, error => {
       this.isApiOk = false;
+      this.errorMessage = `<a href="https://www.google.com/search?q=R%C3%A9pondez+s%27il+vous+pla%C3%AEt">Répondez s'il vous plaît system</a> is not responding. <strong>Please check back later.</strong>`;
       console.log('ApiStatus Bad: '+ error);     
     });
    }
@@ -41,34 +46,44 @@ export class RsvpComponent {
    }
 
 
-  public finishAndUpdate(songName: string) {   
-	console.log('songName:',songName);
-    this.RsvpService.updateRsvpData(this.rsvpCode, {"attending": this.isAttending, "attendingReason": this.attendingReason, "songName": songName});
-    this.stage = 3;
+  public updateUser(jsonObject: any) {   
+    console.log(jsonObject);
+    this.RsvpService.updateRsvpData(this.rsvpCode, jsonObject).then(() => {
+      this.stage++;
+      console.log('Stage:',this.stage);
+    }).catch(() => {
+      this.hasErrorOccured = true;
+      this.stage = -9999;
+    });
   }
 
-  public submitRsvpCode (rsvpCode: string): void {
-    this.inputError = false;
-    this.isLoading = true;
-    if(this.isApiOk) {
-      this.RsvpService.verifyRsvpCode(rsvpCode).then(accessToken => {   
-        if(accessToken) {
-          this.rsvpCode = rsvpCode;
-          this.stage = 1;
-        } else {
-          this.inputError = true;
-          this.isLoading = false;
-        }
-      });
+  public submitRsvpCode (form): void {
+    if(form.status == 'VALID') {
+      this.inputError = false;
+      this.isLoading = true;
+      if(this.isApiOk && this.rsvpCode.length > 0) {
+        this.RsvpService.verifyRsvpCode(this.rsvpCode).then(accessToken => {   
+          if(accessToken) {
+            this.stage = 1;
+          } else {
+            this.inputError = true;
+            this.isLoading = false;
+          }
+        });
+      } else {
+      this.errorMessage = `Don't press that button yet!`;
+      }
     } else {
-		this.errorMessage = `Don't press that button yet!`;
-	}
+      this.inputError = true;
+      this.isLoading = false;
+    }
   }
+
 
   public attendingButton(event){
-	this.isAttending = event.target.className.indexOf('primary') > -1;
-	this.attendingReason = event.target.innerText;
-	this.stage = 2;
+    this.isAttending = event.target.className.indexOf('primary') > -1;
+    this.attendingReason = event.target.innerText;
+    this.updateUser({'isAttending': this.isAttending, 'attendingReason': this.attendingReason});
   }
 
   public onSubmit(form) {

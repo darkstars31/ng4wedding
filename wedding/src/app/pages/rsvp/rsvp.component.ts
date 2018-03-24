@@ -82,6 +82,9 @@ export class RsvpComponent {
 
   public attendingButton(event){
     this.isAttending = event.target.className.indexOf('primary') > -1;
+    if(!this.isAttending) {
+      this.stage = -9999;
+    }
     this.attendingReason = event.target.innerText;
     this.updateUser({'isAttending': this.isAttending, 'attendingReason': this.attendingReason});
   }

@@ -1,191 +1,228 @@
 <div class="hero-body">
     <div class="container has-text-centered">
-      <div *ngIf="stage == 0 && isLoading == false" class="columns is-vcentered">
+        <div *ngIf="stage == 0 && isLoading == false">
             <form #rsvpCodeInputForm="ngForm" novalidate (ngSubmit)="submitRsvpCode(rsvpCodeInputForm)">
-            <div class="column">
-            <!-- <h1 class="title is-4">
-                Oh so you got a nifty RSVP code did ya?
-            </h1>
-            <h2 class="subtitle is-8">
-                Sweet, put it in the box below to continue.
-            </h2> -->
-            <h1 class="title is-4">
-              We see you are super excited to fill out your RSVP!
-            </h1>
-            <h2 class="subtitle is-8">
-                Unfortunately this feature is not enabled yet.
-            </h2>
-            <br>
-              
-            <div class="column is-3 field has-addons">
-            </div>
-            <div class="column is-9 field has-addons">
-                <div class="control is-expanded has-text-centered">
-                    <!-- <input #rsvpCode class="input is-large" type="text" placeholder="Psst, type RSVP code in this box!" /> -->
-                    <input name="rsvpCode" [(ngModel)]="rsvpCode" required class="input is-large" minlength="4" [ngClass]="{'is-danger': inputError}" type="text" placeholder="You will receive your code in the mail. Thanks for your patience." />
+            <div class="row">
+                <div class="column is-vcentered">  
+                    <div class="column">
+                    <!-- <h1 class="title is-4">
+                        Oh so you got a nifty RSVP code did ya?
+                    </h1>
+                    <h2 class="subtitle is-8">
+                        Sweet, put it in the box below to continue.
+                    </h2> -->
+                    <h1 class="title is-4">
+                    We see you are super excited to fill out your RSVP!
+                    </h1>
+                    <h2 class="subtitle is-8">
+                        Unfortunately this feature is not enabled yet.
+                    </h2>
+                    <br>
                 </div>
-                <div class="control">
-                    <button type="submit" class="button is-large is-danger is-outlined" [attr.disabled]="isApiOk ? null : 'disabled'">
-                        RSVP
-                    </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="columns">
+                <div class="column is-2 field has-addons">
                 </div>
-            </div> 
-             
-            <div class="notification is-danger" style="position: absolute; margin-top: 1em;" *ngIf="inputError == true">
-                <button class="delete" (click)="removeNotification('inputError')"></button>
-                We couldn't find your code in our Répondez s'il vous plaît catalog. <strong>Please try entering your code again</strong>, if the issue perists, please email tony@tonysanti.com
+                <div class="column is-9 field has-addons">
+                    <div class="control is-expanded has-text-centered">
+                        <!-- <input #rsvpCode class="input is-large" type="text" placeholder="Psst, type RSVP code in this box!" /> -->
+                        <input name="rsvpCode" [(ngModel)]="rsvpCode" required class="input is-large" minlength="4" [ngClass]="{'is-danger': inputError}" type="text" placeholder="You will receive your code in the mail. Thanks for your patience." />
+                    </div>
+                    <div class="control">
+                        <button type="submit" class="button is-large is-danger is-outlined" [attr.disabled]="isApiOk ? null : 'disabled'">
+                            RSVP
+                        </button>
+                    </div>
+                </div> 
             </div>
-            <div class="notification is-warning is-vcentered" style="position: absolute" *ngIf="isApiOk == false" [innerHtml]="errorMessage">
-              <button class="delete" (click)="removeNotification('isApiOk')"></button>
-              
+            <div class="row">
+                <div class="columns">
+                    <div class="column is-2"></div>
+                    <div class="column is-9">
+                        <div class="notification is-danger" *ngIf="inputError == true">
+                            <button class="delete" (click)="removeNotification('inputError')"></button>
+                            We couldn't find your code in our Répondez s'il vous plaît catalog. <strong>Please try entering your code again</strong>, if the issue perists, please email tony@tonysanti.com
+                        </div>
+                        <div class="notification is-warning is-vcentered" *ngIf="isApiOk == false" [innerHtml]="errorMessage">
+                            <button class="delete" (click)="removeNotification('isApiOk')"></button>
+                        </div>
+                    </div> 
+                </div> 
             </div>
-          </div>       
+        </div>     
         </form>               
       </div>
 
-      <div *ngIf="stage == 1" class="columns is-vcentered">
-          <div class="column is-12">
+
+      <div *ngIf="stage == 1">
           <h1 class="title is-4">
               Will you be attending our wedding?
           </h1>
           <br />
-          <div class="columns is-3">
-            <div class="column">
-                <strong>Yes</strong>
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
-                      <label class="radio" style="width: 100%; padding-bottom: 1em">
-                          <button style="width: 100%" (click)="attendingButton($event)" class="button is-large is-primary"> Will attend with pleasure! </button>
-                    </label>
-                    <br />
-                    <label class="radio" style="width: 100%; padding-bottom: 1em">
-                        <button style="width: 100%" (click)="attendingButton($event)" class="button is-large is-primary">Accepts invitation with regret. </button>
-                    </label>
-                    <br />
-                    <label class="radio" style="width: 100%; padding-bottom: 1em">
-                        <button style="width: 100%" (click)="attendingButton($event)" class="button is-large is-primary"> Decline to respond but attend anyway. </button>
-                    </label>
-                  </div>
+          <!-- <div class="row">
+            <div class="columns">
+                <div class="column">
+                    <h2 class="title">YES!</h2>
+                    </div>
+                <div class="column">
+                    <h2 class="title">NO</h2>
+                </div>
+            </div>
+          </div> -->
+          <div class="row">
+              <div class="columns is-12">
+                  <div class="column is-1"></div>
+              <div class="column">
+                <h2 class="title">YES!</h2>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                <label class="radio" style="width: 100%; padding-bottom: 1em">
+                                    <button style="width: 100%" (click)="attendingButton($event)" class="button is-large is-primary"> Will attend with pleasure! </button>
+                            </label>
+                            <br />
+                            <label class="radio" style="width: 100%; padding-bottom: 1em">
+                                <button style="width: 100%" (click)="attendingButton($event)" class="button is-large is-primary">Accepts invitation with regret. </button>
+                            </label>
+                            <br />
+                            <label class="radio" style="width: 100%; padding-bottom: 1em">
+                                <button style="width: 100%" (click)="attendingButton($event)" class="button is-large is-primary"> Decline to respond but attend anyway. </button>
+                            </label>
+                        </div>
+                    </div>
                 </div>
               </div>
-            </div>  
-            <div class="column ">
-                <strong>No</strong>
-
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
-                      <label class="radio" style="width: 100%; padding-bottom: 1em">
-                          <button style="width: 100%" (click)="attendingButton($event)"class="button is-large is-danger">Regretfully decline to attend. </button>
-                      
-                    </label>
-                    <br />
-                    <label class="radio" style="width: 100%; padding-bottom: 1em">
-                        <button style="width: 100%" (click)="attendingButton($event)" class="button is-large is-danger">  Declines invitation with enthusiasm. </button>
-                     
-                    </label>
-                    <br />
-                    <label class="radio" style="width: 100%; padding-bottom: 1em">
-                        <button style="width: 100%" (click)="attendingButton($event)" class="button is-large is-danger"> No - Other uncreative reason. </button>
-                    
-                    </label>
-                  </div>
+              <div class="column">
+                <h2 class="title">NO</h2>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <label class="radio" style="width: 100%; padding-bottom: 1em">
+                                <button style="width: 100%" (click)="attendingButton($event)"class="button is-large is-danger">Regretfully decline to attend. </button>   
+                            </label>
+                            <br />
+                            <label class="radio" style="width: 100%; padding-bottom: 1em">
+                                <button style="width: 100%" (click)="attendingButton($event)" class="button is-large is-danger">  Declines invitation with enthusiasm. </button>
+                                
+                            </label>
+                            <!-- <br />
+                            <label class="radio" style="width: 100%; padding-bottom: 1em">
+                                <button style="width: 100%" (click)="attendingButton($event)" class="button is-large is-danger"> No - Other uncreative reason. </button>
+                            
+                            </label> -->
+                        </div>
+                    </div>
                 </div>
               </div>
-            </div>    
-        </div> 
+          </div>  
+        </div>               
+    </div> 
+     
 
-   
-          </div> 
-      </div>       
-
-      <div *ngIf="stage == 2" class="columns ">
-          <div class="column is-12">
+    <div *ngIf="stage == 2" class="columns">
+        <div class="column is-12">
             <h1 class="title is-4">
                 How many people are you bringing?
             </h1>
             <h2 class="subtitle is-8">
                 Adults and Children
             </h2>                                               
-                    <div class="container">
-                        <div class="row">
-                            <div class="columns">
-                                <div class="column is-4">
-                                    <label for="numAdults" class="label" style="color:white">Adults Attending (Including you!): {{numAdults}}</label>
-                                    <input name="numAdults" [(ngModel)]="numAdults" class="input is-large" type="range" min="1" max="8" value="1" placeholder="Number of Adults" />
-                                </div>
-                                <div class="column is-4">
-                                    <label for="numChildren" class="label" style="color:white">Children Attending: {{numChildren < 8 ? numChildren : '+' + numChildren}}</label>
-                                    <input name="numChildren" [(ngModel)]="numChildren" class="input is-large" type="range" min="0" max="8" value="0" placeholder="Number of Children" />
+            <div class="container">
+                <div class="row">
+                    <div class="columns">
+                        <div class="column is-2">
+                        </div>
+                        <div class="column is-4">
+                            <label for="numAdults" class="label" style="color:white">Adults Attending (Including you!): {{numAdults}}</label>
+                            <input name="numAdults" [(ngModel)]="numAdults" class="input is-large" type="range" min="1" max="8" value="1" placeholder="Number of Adults" />
+                        </div>
+                        <div class="column is-4">
+                            <label for="numChildren" class="label" style="color:white">Children Attending: {{numChildren < 8 ? numChildren : '+' + numChildren}}</label>
+                            <input name="numChildren" [(ngModel)]="numChildren" class="input is-large" type="range" min="0" max="8" value="0" placeholder="Number of Children" />
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="column is-8">
+                            <label for="dietRestrictions" class="label" style="color:white">Allergy Restrictions</label>
+                            <input name="dietRestrictions" [(ngModel)]="dietRestrictions" class="input is-large" type="text" placeholder="Does anyone in attendence have allergy restrictions?" />
+                    </div>          
+                </div> -->
+                <div class="row">
+                    <div class="column">
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control has-text-centered">
+                                <button (click)="updateUser({'adults': numAdults, 'children': numChildren, 'dietRestrictions': dietRestrictions})" class="button is-large is-primary">
+                                Continue 
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>                          
+                </div>                   
+            </div>                                             
+        </div>
+    </div>
+
+    <div *ngIf="stage == 3" class="columns">
+        <div class="column is-2"></div>
+        <div class="column is-8">
+            <h1 class="title is-4">
+                One Last Question
+            </h1>
+            <h2 class="subtitle is-8">
+                Give us a song that will help get you dancing
+            </h2>                           
+            <div class="field is-horizontal">
+                <div class="container">
+                    <div class="field-label">
+                    <label class="label" style="color:white"></label>
+                    <input #songName class="input is-large" type="text" placeholder="Song Name / Band" />
+                    </div>   
+                    <div class="row">   
+                    <div class="column">
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <div class="field">
+                                    <div class="control has-text-centered">
+                                        <button (click)="updateUser({'songName': songName.value})" class="button is-large is-primary">
+                                        Finish
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="row">
-                            <div class="column is-8">
-                                    <label for="dietRestrictions" class="label" style="color:white">Allergy Restrictions</label>
-                                    <input name="dietRestrictions" [(ngModel)]="dietRestrictions" class="input is-large" type="text" placeholder="Does anyone in attendence have allergy restrictions?" />
-                            </div>          
-                        </div> -->
-                        <div class="row">
-                            <div class="field-body">
-                                    <div class="field">
-                                        <div class="control">
-                                            <button (click)="updateUser({'adults': numAdults, 'children': numChildren, 'dietRestrictions': dietRestrictions})" class="button is-large is-primary">
-                                            Continue ->
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>                           
-                        </div>                   
-                    </div>                                             
-                </div>
+                    </div> 
+                </div>   
             </div>
+            </div>
+        </div>
+    </div>
 
-        <div *ngIf="stage == 3" class="columns ">
-                <div class="column is-12">
-                  <h1 class="title is-4">
-                      One Last Question
-                  </h1>
-                  <h2 class="subtitle is-8">
-                      Give us a song that will help get you dancing
-                  </h2>                  
-                      
-                      <div class="field is-horizontal">
-                          <div class="container">
-                              <div class="field-label column">
-                              <label class="label" style="color:white"></label>
-                              <input #songName class="input is-large" type="text" placeholder="Song Name / Band" />
-                              </div>          
-                              <div class="field is-horizontal">
-                                  <div class="field-label">
-                                  <!-- Left empty for spacing -->
-                                  </div>
-                                  <div class="field-body">
-                                      <div class="field">
-                                          <div class="control">
-                                              <button (click)="updateUser({'songName': songName.value})" class="button is-large is-primary">
-                                              Finish RSVPing
-                                              </button>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-
-      <div *ngIf="stage == 4" class="columns is-vcentered">
+    <div *ngIf="stage == 4" class="columns is-vcentered">
         <div class="column is-12">
         <h1 class="title is-12">
-            Your all done!
+            You're all done!
         </h1>
         <h2 class="subtitle is-8">
-            Thanks for particiapting.
+            Thanks for letting us know.
         </h2>                    
         </div>
-      </div>
+    </div>
+
+    <div *ngIf="!isAttending && stage < 0" class="columns is-vcentered">
+            <div class="column is-12">
+            <h1 class="title is-12">
+                Bummer!
+            </h1>
+            <h2 class="subtitle is-8">
+                Sorry to hear that you won't be able to celebrate with us. 
+            </h2>                    
+        </div>
+    </div>
    
 
     <div *ngIf="hasErrorOccured" class="columns is-vcentered">
@@ -198,5 +235,5 @@
         </h2>                    
         </div>
       </div>
-    
+    </div>
 </div>

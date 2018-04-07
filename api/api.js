@@ -1,4 +1,3 @@
-
 var config  = require('./config');
 var dao     = require('./dao');
 var express = require('express');
@@ -14,7 +13,7 @@ log4js.configure(config.log4jsConfig);
 
 app.use((req, res, next) => {
   var origin = req.get('origin');
-  console.log('Origin:' ,origin);
+  //console.log('Origin:' ,origin);
   if( !origin || config.express.allowedOrigins.some((item) => origin.includes(item))){
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
@@ -28,7 +27,7 @@ app.use((req, res, next) => {
   
 });
 
-console.log('Listening on localhost:'+ config.express.port);
+console.log('RSVP System Listening on localhost:'+ config.express.port);
 console.log('Allowing Origins:'+ config.express.allowedOrigins);
 
 app.get('/health', (req,res,next) => {
@@ -45,8 +44,10 @@ app.get('/health', (req,res,next) => {
 app.get('/rsvp/:code', (req, res, next) => {
     dao.get('/rsvp/families/'+req.params.code.toLowerCase()).then((snapshot) => {
       if(snapshot.exists()){
+        var jwt = jwtHelper.generate(req.params.code);
+        logger.info("Access Code issued for Fmaily: "+req.params.code);
         res.send({ 
-          "accessToken": jwtHelper.generate(req.params.code)
+          "accessToken": jwt
         });
       } else {
         if(req.params.code != 'health'){
@@ -60,8 +61,9 @@ app.get('/rsvp/:code', (req, res, next) => {
 });
 
 app.patch('/rsvp/:code', jwtHelper.validate, (req, res, next) => {
-  dao.get('/rsvp/families/'+req.params.code).then((snapshot) => {
+  dao.get('/rsvp/families/'+req.params.code.toLowerCase()).then((snapshot) => {
     if(snapshot.exists()) {
+      console.log(req.body);
       try{
         var family = dao.ref('/rsvp/families/');
         family.child(req.params.code).update(req.body);
@@ -70,7 +72,9 @@ app.patch('/rsvp/:code', jwtHelper.validate, (req, res, next) => {
         InternalServerError(res, e);
       }
     } else {
-      res.send(false);
+      console.log("Failure to update family:" +req.params.code + " with " +req.body);
+      logger.error("Failure to update family:" +req.params.code + " with " +req.body);
+      res.send("Failure to update family.");
     }
   });    
 
@@ -91,4 +95,3 @@ function InternalServerError(res, e){
 
   
 app.listen(config.express.port);
-

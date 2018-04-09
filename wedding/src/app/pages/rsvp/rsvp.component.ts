@@ -12,7 +12,7 @@ export class RsvpComponent {
 
   public rsvpCode: string = "";
   public stage: number = 0;
-  private isAttending: boolean = null;
+  public isAttending: boolean = null;
   public attendingReason: string;
   public songName: string;
   public hasErrorOccured: boolean = false;
@@ -48,7 +48,7 @@ export class RsvpComponent {
 
   public updateUser(jsonObject: any) {   
     console.log(jsonObject);
-    this.RsvpService.updateRsvpData(this.rsvpCode, jsonObject).then(() => {
+    this.RsvpService.updateRsvpData(this.rsvpCode.toLowerCase(), jsonObject).then(() => {
       this.stage++;
       console.log('Stage:',this.stage);
     }).catch(() => {
@@ -62,7 +62,7 @@ export class RsvpComponent {
       this.inputError = false;
       this.isLoading = true;
       if(this.isApiOk && this.rsvpCode.length > 0) {
-        this.RsvpService.verifyRsvpCode(this.rsvpCode).then(accessToken => {   
+        this.RsvpService.verifyRsvpCode(this.rsvpCode.toLowerCase()).then(accessToken => {   
           if(accessToken) {
             this.stage = 1;
           } else {

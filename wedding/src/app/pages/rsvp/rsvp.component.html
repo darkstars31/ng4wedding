@@ -15,7 +15,7 @@
                     We see you are super excited to fill out your RSVP!
                     </h1>
                     <h2 class="subtitle is-8">
-                        Unfortunately this feature is not enabled yet.
+                        Enter your RSVP code in the box below to get started.
                     </h2>
                     <br>
                 </div>
@@ -28,7 +28,7 @@
                 <div class="column is-9 field has-addons">
                     <div class="control is-expanded has-text-centered">
                         <!-- <input #rsvpCode class="input is-large" type="text" placeholder="Psst, type RSVP code in this box!" /> -->
-                        <input name="rsvpCode" [(ngModel)]="rsvpCode" required class="input is-large" minlength="4" [ngClass]="{'is-danger': inputError}" type="text" placeholder="You will receive your code in the mail. Thanks for your patience." />
+                        <input name="rsvpCode" [(ngModel)]="rsvpCode" required class="input is-large" minlength="4" [ngClass]="{'is-danger': inputError}" type="text" placeholder="Put your code here" />
                     </div>
                     <div class="control">
                         <button type="submit" class="button is-large is-danger is-outlined" [attr.disabled]="isApiOk ? null : 'disabled'">

@@ -80,6 +80,45 @@ app.patch('/rsvp/:code', jwtHelper.validate, (req, res, next) => {
 
 });
 
+app.post('/rsvp/authn', (req, res, next) => {
+  dao.get('/rsvp/admins/').then((snapshot) => {
+    if(snapshot.exists()) {
+      snapshot.forEach(item => {
+        
+      });
+      try{
+        res.send({
+          "accessToken": jwtHelper.generate({
+            "admin": true
+          })
+        });
+      } catch(e){
+        InternalServerError(res, e);
+      }
+    } else {
+      console.log("Admin Password failure:" +req.body.adminPassword);
+      logger.error("Admin Password failure:" +req.body.adminPassword);
+      res.send("Bad Password.");
+    }
+  }); 
+});
+
+app.get('/rsvp/dashboard', jwtHelper.validate, jwtHelper.guard('admin'), (req, res, next) => {
+  dao.get('/rsvp/families/').then((snapshot) => {
+    if(snapshot.exists()) {
+      try{
+        res.send(snapshot);
+      } catch(e){
+        InternalServerError(res, e);
+      }
+    } else {
+      console.log("Dashboard Api Request failure:" +req.body.adminPassword);
+      logger.error("Dashboard Api Request failure:" +req.body.adminPassword);
+      res.send("Failed retrieving Dashboard Dataset.");
+    }
+  }); 
+});
+
 // app.use(function (req, res, next) {
 //   res.status(404).send(`404 No Route Match for ${req.url}`);
 //   if(res.status(404)){

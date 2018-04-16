@@ -21,6 +21,17 @@ var jwtHelper = {
         next();
       },
 
+      guard: (scopes) => {
+		return _middleware.bind(this);
+		
+		function _middleware(req,res,next) {
+			var token = jwt.decode(req.headers.authorization);
+			console.log(token);
+			token.scopes.some(scopes);
+		}
+        
+      },
+
       generate: (payload) => {
         var key = fs.readFileSync(__dirname + '/keys/private_key.pem');
         return jwt.sign({payload: payload}, key, {algorithm: 'RS256', expiresIn: '1h'});  

@@ -1,5 +1,5 @@
 <div class="hero-body">
-    <div class="container has-text-centered">
+    <div class="container is-fluid has-text-centered">
         <div *ngIf="stage == 0 && isLoading == false">
             <form #rsvpCodeInputForm="ngForm" novalidate (ngSubmit)="submitRsvpCode(rsvpCodeInputForm)">
             <div class="row">
@@ -61,57 +61,42 @@
               Will you be attending our wedding?
           </h1>
           <br />
-          <!-- <div class="row">
-            <div class="columns">
-                <div class="column">
-                    <h2 class="title">YES!</h2>
-                    </div>
-                <div class="column">
-                    <h2 class="title">NO</h2>
-                </div>
-            </div>
-          </div> -->
+
           <div class="row">
               <div class="columns is-12">
-                  <div class="column is-1"></div>
-              <div class="column">
+                  <div class="column is-2"></div>
+              <div class="column is-4">
                 <h2 class="title">YES!</h2>
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <label class="radio" style="width: 100%; padding-bottom: 1em">
-                                    <button style="width: 100%" (click)="attendingButton($event)" class="button is-large is-primary"> Will attend with pleasure! </button>
+                                <label class="radio" style="width: 90%;padding-bottom: 1em">
+                                    <button style="width:100%" (click)="attendingButton($event)" class="button is-medium is-primary"> Will attend with pleasure! </button>
                             </label>
                             <br />
-                            <label class="radio" style="width: 100%; padding-bottom: 1em">
-                                <button style="width: 100%" (click)="attendingButton($event)" class="button is-large is-primary">Accepts invitation with regret. </button>
+                            <label class="radio" style="width: 90%; padding-bottom: 1em">
+                                <button style="width:100%" (click)="attendingButton($event)" class="button is-medium is-primary">Accept invitation with regret </button>
                             </label>
                             <br />
-                            <label class="radio" style="width: 100%; padding-bottom: 1em">
-                                <button style="width: 100%" (click)="attendingButton($event)" class="button is-large is-primary"> Decline to respond but attend anyway. </button>
+                            <label class="radio" style="width: 90%; padding-bottom: 1em">
+                                <button style="width:100%"  (click)="attendingButton($event)" class="button is-medium is-primary"> Decline to respond; Attend anyway </button>
                             </label>
                         </div>
                     </div>
                 </div>
               </div>
-              <div class="column">
+              <div class="column is-4">
                 <h2 class="title">NO</h2>
                 <div class="field-body">
                     <div class="field">
                         <div class="control">
-                            <label class="radio" style="width: 100%; padding-bottom: 1em">
-                                <button style="width: 100%" (click)="attendingButton($event)"class="button is-large is-danger">Regretfully decline to attend. </button>   
+                            <label class="radio" style="width: 90%; padding-bottom: 1em">
+                                <button style="width:100%" (click)="attendingButton($event)"class="button is-medium is-danger">Regretfully decline to attend</button>   
                             </label>
                             <br />
-                            <label class="radio" style="width: 100%; padding-bottom: 1em">
-                                <button style="width: 100%" (click)="attendingButton($event)" class="button is-large is-danger">  Declines invitation with enthusiasm. </button>
-                                
+                            <label class="radio" style="width:90%; padding-bottom: 1em">
+                                <button style="width:100%" (click)="attendingButton($event)" class="button is-medium is-danger">Declines invitation with enthusiasm</button>            
                             </label>
-                            <!-- <br />
-                            <label class="radio" style="width: 100%; padding-bottom: 1em">
-                                <button style="width: 100%" (click)="attendingButton($event)" class="button is-large is-danger"> No - Other uncreative reason. </button>
-                            
-                            </label> -->
                         </div>
                     </div>
                 </div>
@@ -136,20 +121,14 @@
                         </div>
                         <div class="column is-4">
                             <label for="numAdults" class="label" style="color:white">Adults Attending (Including you!): {{numAdults}}</label>
-                            <input name="numAdults" [(ngModel)]="numAdults" class="input is-large" type="range" min="1" max="8" value="1" placeholder="Number of Adults" />
+                            <input name="numAdults" [(ngModel)]="numAdults" class="input is-large slider" type="range" min="1" max="8" value="1" placeholder="Number of Adults" />
                         </div>
                         <div class="column is-4">
                             <label for="numChildren" class="label" style="color:white">Children Attending: {{numChildren < 8 ? numChildren : '+' + numChildren}}</label>
-                            <input name="numChildren" [(ngModel)]="numChildren" class="input is-large" type="range" min="0" max="8" value="0" placeholder="Number of Children" />
+                            <input name="numChildren" [(ngModel)]="numChildren" class="input is-large slider" type="range" min="0" max="8" value="0" placeholder="Number of Children" />
                         </div>
                     </div>
-                </div>
-                <!-- <div class="row">
-                    <div class="column is-8">
-                            <label for="dietRestrictions" class="label" style="color:white">Allergy Restrictions</label>
-                            <input name="dietRestrictions" [(ngModel)]="dietRestrictions" class="input is-large" type="text" placeholder="Does anyone in attendence have allergy restrictions?" />
-                    </div>          
-                </div> -->
+                </div>          
                 <div class="row">
                     <div class="column">
                     <div class="field-body">

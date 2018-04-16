@@ -19,6 +19,7 @@ import { RsvpService } from './services/rsvp.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http/src/interceptor';
 import { AuthInterceptor } from './http.interceptor';
 import { RegistryComponent } from './pages/registry/registry.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 
 
@@ -33,7 +34,8 @@ import { RegistryComponent } from './pages/registry/registry.component';
     PhotosComponent,
     RsvpComponent,
     NotfoundComponent,
-    RegistryComponent
+    RegistryComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

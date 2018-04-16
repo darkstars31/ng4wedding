@@ -37,4 +37,15 @@ export class RsvpService {
         return this.http.patch(url, data, { headers: this.createHeaders()})
         .toPromise().catch(this.handleError);     
     }
+
+    public adminLogin(password: string): Promise<any> {
+        let url = `${this.url}/rsvp/authn`;
+        return this.http.post(url, { "adminPassword": password}).toPromise().catch(this.handleError);
+    }
+
+    public adminDashboard(): Promise<any> {
+        let url = `${this.url}/rsvp/dashboard`;
+        return this.http.get(url, {headers: this.createHeaders()} ).toPromise().catch(this.handleError);
+
+    }
 }

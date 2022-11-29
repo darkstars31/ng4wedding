@@ -21,22 +21,24 @@ export class RsvpComponent {
   public numChildren: number = 0;
 
   public isApiOk: boolean = null;
-  public isLoading: boolean = false;
+  public isLoading: boolean = true;
   public inputError: boolean = false;
   public errorMessage: string;
-
-
 
   public RsvpQuestionaire: RsvpQuestionaire;
 
   constructor(private RsvpService: RsvpService){
     this.RsvpService.verifyApiStatus().then(data => {
+    this.isLoading = false;
 		this.isApiOk = data.health;   
-		this.errorMessage = `<a href="https://www.google.com/search?q=R%C3%A9pondez+s%27il+vous+pla%C3%AEt">Répondez s'il vous plaît system</a> is currently disabled. This feature will be enabled shortly before you recieve your RVSP in the mail. <strong>Please come back later</strong>`;
+		this.errorMessage = `<a href="https://www.google.com/search?q=R%C3%A9pondez+s%27il+vous+pla%C3%AEt" target="_blank">Répondez s'il vous plaît system</a> is currently disabled. This feature will be enabled shortly before you recieve your RVSP in the mail. <strong>Please come back later</strong>`;
 
     }, error => {
+      this.isLoading = false;
       this.isApiOk = false;
-      this.errorMessage = `<a href="https://www.google.com/search?q=R%C3%A9pondez+s%27il+vous+pla%C3%AEt">Répondez s'il vous plaît system</a> is not responding. <strong>Please check back later.</strong>`;
+      // Original Functionality before being disabled
+      // this.errorMessage = `<a href="https://www.google.com/search?q=R%C3%A9pondez+s%27il+vous+pla%C3%AEt">Répondez s'il vous plaît system</a> is not responding. <strong>Please check back later.</strong>`;
+      this.errorMessage = `<a href="https://www.google.com/search?q=R%C3%A9pondez+s%27il+vous+pla%C3%AEt" target="_blank">Répondez s'il vous plaît system</a> has been disabled.`;
       console.log('ApiStatus Bad: '+ error);     
     });
    }

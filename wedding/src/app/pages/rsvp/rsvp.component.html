@@ -27,8 +27,7 @@
                 </div>
                 <div class="column is-9 field has-addons">
                     <div class="control is-expanded has-text-centered">
-                        <!-- <input #rsvpCode class="input is-large" type="text" placeholder="Psst, type RSVP code in this box!" /> -->
-                        <input name="rsvpCode" [(ngModel)]="rsvpCode" required class="input is-large" minlength="4" [ngClass]="{'is-danger': inputError}" type="text" placeholder="Put your code here" />
+                        <input name="rsvpCode" [(ngModel)]="rsvpCode" [attr.disabled]="isApiOk ? null : 'disabled'" required class="input is-large" minlength="4" [ngClass]="{'is-danger': inputError}" type="text" placeholder="Put your code here" />
                     </div>
                     <div class="control">
                         <button type="submit" class="button is-large is-danger is-outlined" [attr.disabled]="isApiOk ? null : 'disabled'">
